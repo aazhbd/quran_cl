@@ -1,19 +1,4 @@
-"""quran_cl URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.9/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Import the include() function: from django.conf.urls import url, include
-    3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
 from django.conf.urls import url
 from django.contrib import admin
 
@@ -22,6 +7,11 @@ from quran import views
 urlpatterns = [
     url(r'^$', views.viewHome, name='index'),
     url(r'^home$', views.viewHome, name='index'),
-    url(r'^info$', views.info, name='info'),
+    url(r'^info$', views.viewInfo, name='info'),
+
+    url(r'^login$', views.viewLogin, name='login'),
+    url(r'^discuss$', views.viewDiscuss, name='discuss'),
+    url(r'^logout$', views.viewLogout, name='discuss'),
+
     url(r'^admin/', admin.site.urls),
 ]

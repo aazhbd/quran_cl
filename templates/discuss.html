@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+<div class="homemsg">
+	{% if msg_body %}
+		<h4>{{msg_body}}</h4>
+	{% endif %}
+</div>
+
+
+
+
+{% endblock %}

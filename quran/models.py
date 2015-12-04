@@ -42,7 +42,7 @@ class Chapter(models.Model):
     enabled = models.BooleanField(default=True)
 
     def __str__(self):
-        return str(self.transliteration)
+        return str(self.transliteration )
 
     class Meta:
         pass

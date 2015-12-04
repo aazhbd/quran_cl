@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Login {% endblock %}
+
+
+{% block content %}
+<div class="homemsg">
+	{% if msg_body %}
+		<h4>{{msg_body}}</h4>
+	{% endif %}
+</div>
+
+<form class="pure-form pure-form-aligned" id="login_form" method="post" action="/discuss">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Enter email and password to login</legend>
+		<div class="pure-control-group">
+			<label for="email">Username: </label>
+			<input id="email" type="text" placeholder="Email address" name="email">
+		</div>
+
+		<div class="pure-control-group">
+			<label for="password">Password: </label>
+			<input id="password" type="password" placeholder="Password" name="password">
+		</div>
+
+		<div class="pure-controls">
+			<button type="submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Login</button>
+			<div>
+				Not a member yet? <a href="{{ path_url_postfix }}/signup">Sign Up</a>
+			</div>
+		</div>
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#login_form").validate({
+			rules:{
+				email:{ required: true },
+				password:{ required: true }
+			},
+			messages:{
+				email: {
+					required: "Can't be empty.",
+				},
+				password: {
+					required: "Can't be empty.",
+				}
+			}
+		});
+	});
+</script>
+
+
+{% endblock %}

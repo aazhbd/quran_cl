@@ -20,6 +20,10 @@
 	<!--[if lte IE 6]>
 	<link href="{% static 'css/msie.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
 	<![endif]-->
+
+	<script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+	<script src="{% static "js/jquery.validate.min.js" %}"></script>
+
 	{% block scripttags %}{% endblock %}
 </head>
 
@@ -60,8 +64,9 @@
 			
 			<div id="topright">
 				{% if not user.is_authenticated %}
-					<a href="/accounts/login/?next={{ request.path }}">Login</a> |
-					<a href="/accounts/register/">Register</a> |
+					<a href="/login">Login</a> |
+					<a href="/signup">Register</a>
+					<br />
 					Join in to participate in discussions.
 				{% endif %}
 				{% if user.is_authenticated %}
@@ -71,7 +76,7 @@
 						{{user.username}}
 					{% endif %}
 					<br />
-					<a href="/discussions">Participate in discussions</a> | <a href="/accounts/logout/">Logout</a>
+					<a href="/discussions">Participate in discussions</a> | <a href="/logout">Logout</a>
 				{% endif %}
 			</div>
 
