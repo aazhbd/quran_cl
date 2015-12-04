@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Home {% endblock %}
+
+{% block description %} Quran, All translations in serveral languages, Browsing the full Quran in the Original Text and its translations in various languages by various renowned scholars around the globe. A large collection of translations from various authors have been included in this site to compare the meanings and understand. Having discussion by adding Comments, Questions, Translations, Explanations, History of Verses in order to better help in understanding the message of Quran. Users may register to contribute to any of the verses with the help of references from available materials. Ability to search within the verses of Quran, its translations as well as comments in many languages. All texts, translations and comments of users can be searched efficiently to provide relevant results.{% endblock %}
+{% block keywords %} Quran, translations, several languages {% endblock %}
+
+{% block content %}
+<div class="homemsg">
+	{% if msg_body %}
+		<h4>{{msg_body}}</h4>
+	{% endif %}
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+        $('#sortedtable').dataTable({
+        		"sPaginationType": "full_numbers",
+        		"aLengthMenu": [[25, 50, 114 , -1], [25, 50, 114, "All"]],
+        		"iDisplayLength" : 25,
+        		"aaSorting": [ [0,'asc'] ],
+        		"aoColumns": [
+        			{ "sType":  'numeric' },
+        			null,
+        			null,
+        			null,
+        			null
+        		]
+        	});
+	});
+</script>
+
+<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="sortedtable">
+	<thead>
+		<tr>
+			<td>Chapter No.</td>
+			<td>Name</td>
+			<td>Arabic</td>
+			<td>English Translation of Name</td>
+			<td>Verse Count</td>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<td>Chapter No.</td>
+			<td>Name</td>
+			<td>Arabic</td>
+			<td>English Translation of Name</td>
+			<td>Verse Count</td>
+		</tr>
+	</tfoot>
+	<tbody>
+		{% for m in chapters %}
+		<tr>
+			<td style="width:85px;"><a href="/{{m.id}}/">{{m.id}}</a></td>
+			<td><a href="/{{m.id}}/">{{m.transliteration}}</a></td>
+			<td><a href="/{{m.id}}/">{{m.arabic_name}}</a></td>
+			<td><a href="/{{m.id}}/">{{m.english_name}}</a></td>
+			<td style="width:100px;"><a href="/{{m.id}}/">{{m.total_verses}}</a></td>
+		</tr>
+		{% endfor %}
+</table>
+
+{% endblock %}
