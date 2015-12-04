@@ -1,25 +1,13 @@
-<!--
-/**
-* Quran Template.
-*
-* @author        ArticulateLogic Labs
-* @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com 
-* @copyright     Copyright (c)2013-2015 ArticulateLogic Labs
-* @link          http://www.articulatelogic.com
-* @since         Version 1.0
-*  
-*/
--->
 {% load staticfiles %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-language" content="en" />
-	<meta name="author" content="Quran Analyst, aazhbd, aazhbd@yahoo.com" />
-	<meta name="Copyright" content="Quran Analyst, aazhbd, aazhbd@yahoo.com" />
-	<meta name="description" content={% block description %} "This site takes a humble attempt to provide a set of facilities for comprehensive research on Quran and available materials as well as allow discussions for better understanding." {% endblock %} />
-	<meta name="keywords" content="quran, translations,Islam, teachings of quran, surah, surat, languages, meaning, understanding quran {% block keywords %} {% endblock %}" />
+	<meta name="author" content="Quran, aazhbd, aazhbd@yahoo.com" />
+	<meta name="Copyright" content="Quran, aazhbd, aazhbd@yahoo.com" />
+	<meta name="description" content="{% block description %}This site takes a humble attempt to provide a set of facilities for comprehensive research on Quran and available materials as well as allow discussions for better understanding.{% endblock %}" />
+	<meta name="keywords" content="Quran, translations,Islam, teachings of quran, surah, surat, languages, meaning, understanding quran {% block keywords %} {% endblock %}" />
 	<meta name="robots" content="index, follow, I followed" />
     
     <title>Quran - {% block title %} Home {% endblock %}</title>
@@ -32,300 +20,101 @@
 	<!--[if lte IE 6]>
 	<link href="{% static 'css/msie.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
 	<![endif]-->
+	{% block scripttags %}{% endblock %}
 </head>
 
 <body>
     <div id="contentheader">
-		{% block contentheader %}
         <div id="banner">
             <img src="{% static 'images/logo_quran_conveylive.png' %}" id="logo" />
 
+			{% block contentheader %}
 			<div id="navigatemenu">
 				<div class="pure-menu pure-menu-horizontal">
 					<ul class="pure-menu-list">
-						<li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-						<li class="pure-menu-item"><a href="#" class="pure-menu-link">Discussion</a></li>
-						<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-							<a href="#" id="menuLink1" class="pure-menu-link">Contact</a>
-							<ul class="pure-menu-children">
-								<li class="pure-menu-item"><a href="#" class="pure-menu-link">Email</a></li>
-								<li class="pure-menu-item"><a href="#" class="pure-menu-link">Twitter</a></li>
-								<li class="pure-menu-item"><a href="#" class="pure-menu-link">Tumblr Blog</a></li>
-							</ul>
+						<li class="pure-menu-item">
+							<a href="/home" class="pure-menu-link">Home</a>
+						</li>
+						<li class="pure-menu-item">
+							<a href="/discussions" class="pure-menu-link">Discussion</a>
+						</li>
+						<li class="pure-menu-item">
+							<a href="/info" class="pure-menu-link">Info</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			
 			<div id="search" class="pure-form">
-				<form class="frmsearch" method="post" id="frmsearch" action="">
+				<form class="frmsearch" method="post" id="frmsearch" action="/search">
+					{% csrf_token %}
 					<span>
 						<input type="text" class="search"  placeholder="Search" name="search">
 						<input type="submit" class="btnsearch" value="Search" id="submit" name="submit">
 					</span>
 				</form>
 			</div>
+			{% endblock %}
 			
 			<div id="topright">
-				<a href="/logout">Logout</a>
-				|
-				<a href="/uhome">Member Home</a>
+				{% if not user.is_authenticated %}
+					<a href="/accounts/login/?next={{ request.path }}">Login</a> |
+					<a href="/accounts/register/">Register</a> |
+					Join in to participate in discussions.
+				{% endif %}
+				{% if user.is_authenticated %}
+					{% if user.first_name != "" or user.last_name != "" %}
+						{{user.first_name}} {{user.last_name}}
+					{% else %}
+						{{user.username}}
+					{% endif %}
+					<br />
+					<a href="/discussions">Participate in discussions</a> | <a href="/accounts/logout/">Logout</a>
+				{% endif %}
 			</div>
 
         </div>
-		{% endblock %}
     </div>
     
     <div id="contentbody">
-		{% block reports %}
-        <div id="reports">message</div>
-		{% endblock %}
+		{% if messages %}
+			{% for message in messages %}
+				<div id="reports">{{message}}</div>
+			{% endfor %}
+		{% endif %}
 		
-		{% block languageselectors %}
-		<div id="selectors">
-			<form method="post" action="" class="pure-form">
-			<fieldset>
-				<legend>Choose from the set of available data:</legend>
-				<div id="authorlist">
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-					<div class="choices">
-						<label for="langselectDiyanet Vakfi" class="pure-checkbox">
-							<input type="checkbox" value="Diyanet Vakfi" author="79" name="langselector[]"> Turkish - Diyanet Vakfi
-						</label>
-					</div>
-					
-				</div>
-			</fieldset>
-			</form>
-		</div>
-		{% endblock %}
-		
+		{% block languageselectors %}{% endblock %}
 
+		{% if title %}
         <h2 class="title">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit
+			{{ title }}
 		</h2>
+		{% endif %}
 
 		<div class="body">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
-			
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
-			
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
-			
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
-			
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
+			{% block content %}This page is under construction.{% endblock %}
 		</div>
     </div>
     
     <div id="footer">
         <p>
-			&copy; 2015 <a href="http://www.articulatelogic.com/">ArticulateLogic.com</a>
-			| Design: <a href="mailto:aazhbd@yahoo.com">aazhbd</a>
+			&copy; 2013 - 2015 <a href="mailto:aazhbd@yahoo.com">AAZ H</a> | <a href="http://www.articulatelogic.com/">ArticulateLogic.com</a>
+			| <a href="/home">Home</a>
+			| <a href="/discussion">Discussion</a>
+			| <a href="/info">Info</a>
 		</p>
     </div>
 </body>
 </html>
+<!--
+/**
+* Quran Template.
+*
+* @author        ArticulateLogic Labs
+* @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
+* @copyright     Copyright (c)2013-2015 ArticulateLogic Labs
+* @link          http://www.articulatelogic.com
+* @since         Version 1.0
+*
+*/
+-->

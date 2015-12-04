@@ -21,5 +21,6 @@ from quran import views
 
 urlpatterns = [
     url(r'^$', views.viewHome, name='index'),
+    url(r'^info$', views.info, name='info'),
     url(r'^admin/', admin.site.urls),
 ]

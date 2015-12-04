@@ -233,11 +233,11 @@ img {
     text-align: center;
     margin: auto;
     color: #999;
-    float: none;
     padding: 10px;
 }
 
 #footer p{
+    margin: 0 auto;
     text-align: center;
 }
 

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Info {% endblock %}
+
+{% block description %} Quran, All translations in serveral languages, Browsing the full Quran in the Original Text and its translations in various languages by various renowned scholars around the globe. A large collection of translations from various authors have been included in this site to compare the meanings and understand. Having discussion by adding Comments, Questions, Translations, Explanations, History of Verses in order to better help in understanding the message of Quran. Users may register to contribute to any of the verses with the help of references from available materials. Ability to search within the verses of Quran, its translations as well as comments in many languages. All texts, translations and comments of users can be searched efficiently to provide relevant results.{% endblock %}
+{% block keywords %} Quran, translations, several languages {% endblock %}
+
+{% block content %}
+<div class="homemsg">
+	{% if msg_body %}
+	<div class="title">{{msg_body}}</div>
+	{% endif %}
+</div>
+
+<h4>Introduction</h4>
+
+<p>
+The Holy Quran is the word of Allah (the God) revealed to the prophet Muhammad (pbuh) during his life time at Mecca and Medina as a guidence to the human kind.
+It is widely regarded as the finest piece of literature in Arabic language. 
+The Quran’s message is errorless and don't have any contradictions. 
+It has the set of instructions for mankind for their life and the hereafter. 
+Various scholars have published research, translations and commentaries to better realize and understand the Holy Quran. 
+The Quran contains signs and indication for those who search for truth. 
+</p>
+
+<p>
+This site takes a humble attempt to provide a set of facilities for comprehensive research on Quran and available materials 
+as well as allow discussions for better understanding.
+</p>
+
+<p>The site contains tools such as,
+	<br/>
+	1. Browsing the full Quran in the Original Text and its translations in various languages by various renowned scholars around the globe. 
+	A large collection of translations from various authors have been included in this site to compare the meanings and understand.
+	<br/><br/>
+	2. Ability to search within the verses of Quran, its translations as well as comments in many languages. 
+	All texts, translations and comments of users can be searched efficiently to provide relevant results.
+	<br/><br/>
+	3. Having discussion by adding Comments, Questions, Translations, Explanations, History of Verses in order to better help in understanding the message of Quran.
+	Users may register to contribute to any of the verses with the help of references from available materials.
+	<br/>
+</p>
+
+<h4>Disclaimer</h4>
+
+<p>
+All rights and credits for the translations belong to respective translators, scholars and maintainers.
+<br/><br/>
+Original Text, and most of its translations and transliteration data sources include
+<br/>
+www.qurandatabase.org, 
+www.tanzil.info, 
+www.theholyquran.org, 
+Zekr project, zekr.org, 
+islam.googlecode.com/files/quran_bangla.sql.zip, 
+quran-online.net, 
+www.islamforbulgaria.com, 
+www.islamware.com, 
+www.theholyquran.org, 
+www.rojakurdi.com/Kurdi/quran.html 
+Bosnian and Turkish web sites, 
+and many other sources.
+<br/><br/>
+
+</p>
+
+<h4>Acknowledgement</h4>
+
+<p>
+I would like to acknowledge gratitude to almighty Allah (swt) for allowing the efforts to make this website possible. 
+It has been largely helped by the open source Muslim community databases and technologies that are maintained by several 
+generous people around the world. Also many of my friends and my mother have given me useful pointers and advice. 
+Close collaboration has been given by S. T. Rumy on many different issues. 
+Also a number of suggestions and help has been received from Y. A. Farhad.<br/><br/>
+I am working to make it accurate, more informative and featureful. Your questions and feedbacks are highly appreciated.<br/><br/>
+Feel free to mail me at <a href="mailto:aazhbd@yahoo.com">aazhbd@yahoo.com</a>.
+</p>
+
+<p style="float:right;">Abdullah Al Zakir Hossain (Mahbub)</p>
+{% endblock %}
