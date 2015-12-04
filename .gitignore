@@ -1,0 +1,7 @@
+.sqlite3
+.pyc
+.mo
+.vscode
+.idea
+db.sqlite3
+
