@@ -1,6 +1,7 @@
-.sqlite3
-.pyc
-.mo
+*.sqlite3
+*.db
+*.pyc
+*.mo
 .vscode
 .idea
 db.sqlite3
