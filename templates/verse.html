@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Verse {{cnum}}:{{vnum}} Details {% endblock %}
+
+{% block description %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {% for c in comments %} {{c.ctext}}, {% endfor %} {% endblock %}
+{% block keywords %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}} {% endblock %}
+
+{% block scripttags %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#commentForm").validate();
+
+		$("input[name='langselector[]']").click(function() {
+			var clickData = $(this).val();
+
+			if(!$(this).is(':checked')) {
+				var author_id = $(this).attr('author');
+				$('.author-' + author_id).remove();
+				return;
+			}
+
+			var data = {
+				authorName : clickData,
+				chapterNum : {{cnum}},
+			verseNum : {{vnum}},
+			'csrfmiddlewaretoken' : '{{ csrf_token }}',
+		};
+
+			var url = "/getverse";
+
+			var args = {
+				type : "POST",
+				url : url,
+				data : data,
+
+				success : function(result) {
+					for(i = 0; i < result.length; i++)
+					{
+						var tmp = $('#verseTrans' + result[i].verseNum).html();
+
+						var str = '<div class="author-'  + result[i].authorid + '"><span class="verseTxt">' + result[i].vtext + '</span><div class="verseAuth">Language: ' + result[i].lang + '- Source: </div><span class="verseAuth">' + result[i].author + '</span></div>';
+
+						$('#verseTrans' + result[i].verseNum).html(tmp + str);
+					}
+				},
+			};
+
+			xhr = $.ajax(args);
+		});
+	});
+</script>
+{% endblock %}
+
+{% block languageselectors %}
+<div id="selectors">
+	<form action="" method="post" class="pure-form">
+		<fieldset>
+			<legend>Choose from the set of available data:</legend>
+
+			{% for m in authors %}
+			<div class="choices">
+				<label for="langselect{{m}}" class="pure-checkbox">
+					<input type="checkbox" name="langselector[]" author="{{m.id}}" value="{{m}}" id="langselect{{m}}" /> {{m.alang}} - {{m}}
+				</label>
+			</div>
+			{% endfor %}
+		</fieldset>
+	</form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="lowered_body">
+	<div class="homemsg">
+		{% if msg_body %}
+			<h4>{{msg_body}}</h4>
+		{% endif %}
+	</div>
+
+	<div id="backlinks">
+		<a href="/home">Home </a> > <a href="/{{cnum}}">Chapter {{cnum}} </a> > <a href="/{{cnum}}/{{vnum}}">Verse {{vnum}}</a>
+	</div>
+
+	{% for m in verse %}
+	<div class="verseBox" id="verse_{{m.id}}">
+		<div class="verseNum">
+			<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a>
+		</div>
+		<span class="verseTxt">
+			{{m.vtext}}
+		</span>
+		<div class="verseAuth">
+			Language: {{m.author.alang}} - Source:
+		</div>
+		<span class="verseAuth">
+			{{m.author}}
+		</span>
+
+		<div id="verseTrans{{m.number}}" class="transV">
+			&nbsp;
+		</div>
+	</div>
+	{% endfor %}
+
+
+	<form action="/{{ comment_form.cnum.value }}/{{ comment_form.vnum.value }}" method="post" id="commentForm">
+	{% csrf_token %}
+		<fieldset>
+		<legend>Post your comment about this verse</legend>
+		{% if request.user.is_authenticated %}
+			<div>
+				<div style="float:left; width:160px;">
+					<label for="comment_type">Select type of your comment:</label>
+				</div>
+				{{ comment_form.comment_type }}
+			</div>
+			<div>
+				<div style="float:left; width:160px;">
+					<label for="comments">Your comment:</label>
+				</div>
+				<div>
+					{{ comment_form.ctext }}
+					<label class="error">{{ comment_form.ctext.errors.as_text }}</label>
+				</div>
+			</div>
+			<div>
+				<div style="float:left; width:160px;">
+					<label for="uucomment">Captcha:</label>
+				</div>
+				<div>
+					{{ comment_form.captcha }}
+					<label class="error">{{ comment_form.captcha.errors.as_text }}</label>
+				</div>
+			</div>
+			<div>
+				{{ comment_form.vnum }}
+				{{ comment_form.cnum }}
+				{{ comment_form.user }}
+				{{ comment_form.user.errors.as_text }}
+				<input type="submit" class="linkBtn" name="submit" value="     Post     " />
+			</div>
+		{% else %}
+			<div>
+				You must <a href="/accounts/login/?next={{ request.path }}">login</a> to post comments.
+			</div>
+		{% endif %}
+		</fieldset>
+	</form>
+
+	{% if comments %}
+	<h4>Discussions: </h4>
+		{% for c in comments %}
+		<div class="commentBox" style="{% if c.comment_type == 'Question' %}background:#eee; {% elif c.comment_type == 'Explanation' %} background:#eef; {% endif %}">
+			<span class="verseTxt">
+				Posted by {% if c.user.first_name != "" or c.user.last_name != "" %} {{c.user.first_name}} {{c.user.last_name}} {% else %} {{c.user}} {% endif %} : {{c.ctext|urlize|linebreaks}}
+			</span>
+			<div class="verseAuth">
+				As {{c.comment_type}} on verse <a href="/{{c.vnum}}/{{c.cnum}}/">{{c.vnum}}:{{c.cnum}}</a> posted on {{c.date_published}}
+			</div>
+		</div>
+		{% endfor %}
+	{% endif %}
+</div>
+{% endblock %}

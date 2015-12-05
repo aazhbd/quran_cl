@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Details of Chapter {{cnum}} {% endblock %}
+
+{% block description %} Quran, chapter {{cnum}}, {% endblock %}
+{% block keywords %} Quran, chapter {{cnum}}, {% endblock %}
+
+{% block scripttags %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("input[name='langselector[]']").click(function() {
+			var clickData = $(this).val();
+
+			if(!$(this).is(':checked')) {
+				var author_id = $(this).attr('author');
+				$('.author-' + author_id).remove();
+				return;
+			}
+
+			var data = {
+				authorName : clickData,
+				chapterNum : {{cnum}},
+			'csrfmiddlewaretoken' : '{{ csrf_token }}',
+		};
+
+			var url = "/getchapter";
+
+			var args = {
+				type : "POST",
+				url : url,
+				data : data,
+
+				success : function(result) {
+					for(i = 0; i < result.length; i++)
+					{
+						var tmp = $('#verseTrans' + result[i].verseNum).html();
+
+						var str = '<div class="author-'  + result[i].authorid + '"><span class="verseTxt">' + result[i].vtext + '</span><div class="verseAuth">Language: ' + result[i].lang + '- Source: </div><span class="verseAuth">' + result[i].author + '</span></div>';
+
+						$('#verseTrans' + result[i].verseNum).html(tmp + str);
+					}
+				},
+			};
+
+			xhr = $.ajax(args);
+		});
+	});
+</script>
+{% endblock %}
+
+{% block languageselectors %}
+<div id="selectors">
+	<form action="" method="post" class="pure-form">
+		<fieldset>
+			<legend>Choose from the set of available data:</legend>
+
+			{% for m in authors %}
+			<div class="choices">
+				<label for="langselect{{m}}" class="pure-checkbox">
+					<input type="checkbox" name="langselector[]" author="{{m.id}}" value="{{m}}" id="langselect{{m}}" /> {{m.alang}} - {{m}}
+				</label>
+			</div>
+			{% endfor %}
+		</fieldset>
+	</form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="lowered_body">
+	<div class="homemsg">
+		{% if msg_body %}
+		<h4>{{msg_body}}</h4>
+		{% endif %}
+	</div>
+
+	<div id="backlinks">
+		<a href="/home">Home </a> > <a href="/{{cnum}}">Chapter {{cnum}} </a>
+	</div>
+
+	{% if cnum != "9" and cnum != "1" %}
+	<div class="verseBox" id="verse">
+		<span class="verseTxt">بسم الله الرحمن الرحيم</span>
+	</div>
+	<div class="verseBox" id="verse">
+		<span class="verseTxt">bismi-llāhi r-raḥmāni r-raḥīm</span>
+	</div>
+	<div class="verseBox" id="verse">
+		<span class="verseTxt">In the name of God, the Most Gracious, the Most Merciful.</span>
+	</div>
+	{% endif %}
+
+
+	{% for m in full_chap %}
+	<div class="verseBox" id="verse_{{m.id}}">
+		<div class="verseNum">
+			<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a>
+		</div>
+	<span class="verseTxt">
+		{{m.vtext}}
+	</span>
+		<div class="verseAuth">
+			Language: {{m.author.alang}} - Source: {{m.author}}
+		</div>
+
+		<div id="verseTrans{{m.number}}" class="transV">
+		</div>
+
+	<span class="linkBtn">
+		<a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a>
+	</span>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

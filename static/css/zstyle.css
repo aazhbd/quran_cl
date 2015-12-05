@@ -224,6 +224,16 @@ img {
     line-height: 1.9em;
 }
 
+.homemsg {
+    font-size: 1.55em;
+    color: #1D62B3;
+    padding: .4em 0;
+}
+
+.lowered_body {
+    margin-top: 127px;
+}
+
 /* body ends here */
 
 

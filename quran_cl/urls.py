@@ -14,5 +14,11 @@ urlpatterns = [
     url(r'^signup$', views.viewSignup, name='signup'),
     url(r'^discuss$', views.viewDiscuss, name='discuss'),
 
+    url(r'^(?P<chap>\d+)/?$', views.viewChapter, name='chapter'),
+    url(r'^getchapter$', views.getChapter, name='getchapter'),
+
+    url(r'^(?P<chap>\d+)/(?P<verse>\d+)/?$', views.viewVerse, name='verse'),
+    url(r'^getverse$', views.getVerse, name='getverse'),
+
     url(r'^admin/', admin.site.urls),
 ]
