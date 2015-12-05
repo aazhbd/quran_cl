@@ -10,8 +10,9 @@ urlpatterns = [
     url(r'^info$', views.viewInfo, name='info'),
 
     url(r'^login$', views.viewLogin, name='login'),
+    url(r'^logout$', views.viewLogout, name='logout'),
+    url(r'^signup$', views.viewSignup, name='signup'),
     url(r'^discuss$', views.viewDiscuss, name='discuss'),
-    url(r'^logout$', views.viewLogout, name='discuss'),
 
     url(r'^admin/', admin.site.urls),
 ]
