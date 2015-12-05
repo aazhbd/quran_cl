@@ -22,13 +22,14 @@ def viewInfo(request):
 
 def viewLogin(request):
 	context = RequestContext(request)
-	name = request.POST.get('name', None)
-	email = request.POST.get('email', None)
-	upass = request.POST.get('password', None)
-	rpass = request.POST.get('rpass', None)
-	captcha = request.POST.get('hiddenRecaptcha', None)
 
 	if request.method == "POST":
+		name = request.POST.get('name', None)
+		email = request.POST.get('email', None)
+		upass = request.POST.get('password', None)
+		rpass = request.POST.get('rpass', None)
+		captcha = request.POST.get('hiddenRecaptcha', None)
+
 		if email and upass:
 			user = User.objects.create_user(email, email, upass)
 			user.first_name = name
@@ -42,10 +43,11 @@ def viewLogin(request):
 
 def viewDiscuss(request):
 	context = RequestContext(request)
-	username = request.POST.get('email', None)
-	password = request.POST.get('password', None)
 
 	if request.method == "POST":
+		username = request.POST.get('email', None)
+		password = request.POST.get('password', None)
+
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			if user.is_active:
