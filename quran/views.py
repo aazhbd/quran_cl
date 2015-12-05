@@ -65,7 +65,7 @@ def viewDiscuss(request):
 			context.update({ 'msg_body' : "The username and password were incorrect.", })
 			return render_to_response("login.html", context_instance=context)
 
-	context.update({ 'msg_body' : "Discussions.", })
+	context.update({ 'msg_body' : "Discussions", })
 	return render_to_response("discuss.html", context_instance=context)
 
 def viewLogout(request):

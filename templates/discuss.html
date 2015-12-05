@@ -9,9 +9,7 @@
 	{% endif %}
 </div>
 
-<h4>Recent Discussions</h4>
-
-<div class="subtitle">To reply to comments, view more details:</div>
+<h2>Recent Discussions</h2>
 
 {% for c in comments %}
 <div class="commentBox"">
@@ -24,7 +22,7 @@
 		{% endif %}
 	</div>
 	<p>
-		{{ c.ctext|truncatechars:250 }} <a href="/{{c.cnum}}/{{c.vnum}}/">More Details</a>
+		{{ c.ctext|truncatechars:280 }} <a href="/{{c.cnum}}/{{c.vnum}}/">More Details and Reply</a>
 	</p>
 
 	<div class="verseAuth">
