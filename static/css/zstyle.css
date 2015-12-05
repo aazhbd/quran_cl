@@ -203,11 +203,10 @@ img {
 
 .subtitle{
     color: #101010;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 1em;
-    padding-top: .1em;
-    padding-bottom: 0.2em;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 1.2em;
+    padding: .1em;
 }
 
 /* subtitle ends here */
@@ -224,7 +223,8 @@ img {
     line-height: 1.9em;
 }
 
-.homemsg {
+.homemsg h4 {
+    font-weight: lighter;
     font-size: 1.55em;
     color: #1D62B3;
     padding: .4em 0;
@@ -232,6 +232,10 @@ img {
 
 .lowered_body {
     margin-top: 127px;
+}
+
+.commentBox {
+    margin: 20px auto;
 }
 
 /* body ends here */

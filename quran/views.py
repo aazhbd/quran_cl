@@ -47,6 +47,9 @@ def viewLogin(request):
 def viewDiscuss(request):
 	context = RequestContext(request)
 
+	comments = Comment.objects.all().order_by('-date_published')
+	context.update({ 'comments' : comments, })
+
 	if request.method == "POST":
 		username = request.POST.get('email', None)
 		password = request.POST.get('password', None)
@@ -62,7 +65,7 @@ def viewDiscuss(request):
 			context.update({ 'msg_body' : "The username and password were incorrect.", })
 			return render_to_response("login.html", context_instance=context)
 
-	context.update({ 'msg_body' : "Participate in discussions.", })
+	context.update({ 'msg_body' : "Discussions.", })
 	return render_to_response("discuss.html", context_instance=context)
 
 def viewLogout(request):
