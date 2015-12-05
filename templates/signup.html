@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Signup {% endblock %}
+
+{% block scripttags %}
+<script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="homemsg">
+	{% if msg_body %}
+		<h4>{{msg_body}}</h4>
+	{% endif %}
+</div>
+
+<form class="pure-form pure-form-aligned" id="sign_form" method="post" action="/login">
+	{% csrf_token %}
+	<fieldset>
+		<legend>Enter registration information</legend>
+		<div class="pure-control-group">
+			<label for="name">Name</label>
+			<input id="name" type="text" placeholder="Name" name="name">
+		</div>
+
+		<div class="pure-control-group">
+			<label for="email">Email</label>
+			<input id="email" type="email" placeholder="Email" name="email">
+		</div>
+
+		<div class="pure-control-group">
+			<label for="password">Password</label>
+			<input id="password" type="password" placeholder="Password" name="password">
+		</div>
+
+		<div class="pure-control-group">
+			<label for="rpass">Re-type Password</label>
+			<input id="rpass" type="password" placeholder="Re-type Password" name="rpass">
+		</div>
+
+		<div class="pure-control-group">
+			<label for="g-recaptcha" style="float: left;">Captcha</label>
+			<div class="g-recaptcha" data-sitekey="6LfsqBATAAAAAPt_BXPWzWmlP0f22ydpdL_7iOsb" style="float: left; margin: 5px; "></div>
+			<input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
+		</div>
+
+		<div class="pure-controls">
+			<label for="agree" class="pure-checkbox" id="agree-label" style="display: block;  clear: both;">
+				<input id="agree" type="checkbox" name="agree" value="1"> I've read the <a href='{{ path_url_postfix }}/a/terms'>Terms and conditions</a>
+			</label>
+
+			<button type="submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Signup</button>
+		</div>
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#sign_form").validate({
+			ignore: ".ignore",
+			groups: {
+				agree: "agree"
+			},
+			errorPlacement: function(error, element) {
+				if (element.attr("name") == "agree") {
+					error.insertAfter("#agree-label");
+				} else {
+					error.insertAfter(element);
+				}
+			},
+			rules:{
+				name:{ required: true },
+				email:{ required: true, email: true },
+				password:{ required: true },
+				rpass:{ required: true, equalTo: "#password" },
+				agree: { required: true },
+				"hiddenRecaptcha": {
+					required: function() {
+						if(grecaptcha.getResponse() == '') {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				}
+			},
+			messages:{
+				name: {
+					required: "Enter name.",
+				},
+				email: {
+					required: "Enter email.",
+					email: "Email needs to be valid.",
+				},
+				password: {
+					required: "Enter password.",
+				},
+				rpass: {
+					required: "Enter password again.",
+					equalTo: "Password don't match."
+				},
+				agree: "Terms and conditions needs to be accepted.",
+				"hiddenRecaptcha": "The captcha is not validated."
+			}
+		});
+	});
+</script>
+
+
+{% endblock %}
