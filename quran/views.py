@@ -44,18 +44,18 @@ def viewDiscuss(request):
 	context = RequestContext(request)
 	username = request.POST.get('email', None)
 	password = request.POST.get('password', None)
-	authenticated = False
 
-	user = authenticate(username=username, password=password)
-	if user is not None:
-		if user.is_active:
-			login(request, user)
-			context.update({ 'msg_body' : "Login is successful, participate in discussions.", })
+	if request.method == "POST":
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			if user.is_active:
+				login(request, user)
+				context.update({ 'msg_body' : "Login is successful, participate in discussions.", })
+			else:
+				context.update({ 'msg_body' : "The account is currently inactive, contact administrator.", })
 		else:
-			context.update({ 'msg_body' : "The account is currently inactive, contact administrator.", })
-	else:
-		context.update({ 'msg_body' : "The username and password were incorrect.", })
-		return render_to_response("login.html", context_instance=context)
+			context.update({ 'msg_body' : "The username and password were incorrect.", })
+			return render_to_response("login.html", context_instance=context)
 
 	return render_to_response("discuss.html", context_instance=context)
 
