@@ -12,7 +12,7 @@
 <h2>Recent Discussions</h2>
 
 {% for c in comments %}
-<div class="commentBox"">
+<div class="commentBox">
 	<div class="subtitle">
 		A {{c.comment_type}} on verse
 		<a href="/{{c.vnum}}/{{c.cnum}}/">
@@ -24,12 +24,11 @@
 	</p>
 
 	<div class="verseAuth">
-		Posted by
 		{% if c.user.first_name != "" or c.user.last_name != "" %}
-		{{c.user.first_name}} {{c.user.last_name}}
+			Posted by {{ c.user.first_name }} {{ c.user.last_name }}
 		{% else %}
-		{{c.user}}
-		{% endif %} on {{c.date_published}}
+			Posted by{{ c.user }}
+		{% endif %} on {{ c.date_published }}
 	</div>
 </div>
 {% endfor %}
