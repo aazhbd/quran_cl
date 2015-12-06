@@ -16,7 +16,7 @@
 
 body {
     width: 100%;
-	font: 0.8em Tahoma, sans-serif;
+    font: 0.8em Verdana, Helvetica, sans-serif;
     color: #000;
     margin: 0 auto;
     position: absolute;
@@ -243,12 +243,12 @@ img {
 .commentBox {
     box-shadow: 0 0px 4px 0px #ddd;
     opacity: 0.82;
-    min-height: 120px;
+    min-height: 50px;
     border-radius: 0.2em;
     -moz-border-radius: 0.2em;
     -webkit-border-radius: 0.2em;
     margin: 10px auto;
-    padding: 20px;
+    padding: 4px;
 }
 
 /* body ends here */
@@ -288,6 +288,7 @@ img {
     top: 91px;
     margin: 0 auto;
     overflow: auto;
+    z-index: 999;
 }
 
 .choices {

@@ -14,23 +14,22 @@
 {% for c in comments %}
 <div class="commentBox"">
 	<div class="subtitle">
-		Posted by
-		{% if c.user.first_name != "" or c.user.last_name != "" %}
-			{{c.user.first_name}} {{c.user.last_name}}
-		{% else %}
-			{{c.user}}
-		{% endif %}
+		A {{c.comment_type}} on verse
+		<a href="/{{c.vnum}}/{{c.cnum}}/">
+			{{c.vnum}}:{{c.cnum}}
+		</a>
 	</div>
 	<p>
 		{{ c.ctext|truncatechars:280 }} <a href="/{{c.cnum}}/{{c.vnum}}/">More Details and Reply</a>
 	</p>
 
 	<div class="verseAuth">
-		As a {{c.comment_type}} on verse
-		<a href="/{{c.vnum}}/{{c.cnum}}/">
-			{{c.vnum}}:{{c.cnum}}
-		</a>
-		posted on {{c.date_published}}
+		Posted by
+		{% if c.user.first_name != "" or c.user.last_name != "" %}
+		{{c.user.first_name}} {{c.user.last_name}}
+		{% else %}
+		{{c.user}}
+		{% endif %} on {{c.date_published}}
 	</div>
 </div>
 {% endfor %}

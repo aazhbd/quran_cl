@@ -80,10 +80,7 @@
 
 	{% if cnum != "9" and cnum != "1" %}
 	<div class="verseBox" id="verse">
-		<span class="verseTxt">بسم الله الرحمن الرحيم</span>
-	</div>
-	<div class="verseBox" id="verse">
-		<span class="verseTxt">bismi-llāhi r-raḥmāni r-raḥīm</span>
+		<span class="verseTxt">بسم الله الرحمن الرحيم</span><span class="verseTxt">bismi-llāhi r-raḥmāni r-raḥīm</span>
 	</div>
 	<div class="verseBox" id="verse">
 		<span class="verseTxt">In the name of God, the Most Gracious, the Most Merciful.</span>
@@ -92,23 +89,12 @@
 
 
 	{% for m in full_chap %}
-	<div class="verseBox" id="verse_{{m.id}}">
-		<div class="verseNum">
-			<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a>
-		</div>
-	<span class="verseTxt">
-		{{m.vtext}}
-	</span>
-		<div class="verseAuth">
-			Language: {{m.author.alang}} - Source: {{m.author}}
-		</div>
-
-		<div id="verseTrans{{m.number}}" class="transV">
-		</div>
-
-	<span class="linkBtn">
-		<a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a>
-	</span>
+	<div class="commentBox"">
+		<p>
+			<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | {{m.vtext}} <a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a>
+			<br />Language: {{m.author.alang}} - Source: {{m.author}}
+		</p>
+		<div id="verseTrans{{m.number}}" class="transV"></div>
 	</div>
 	{% endfor %}
 </div>
