@@ -175,7 +175,7 @@ def getChapter(request):
 	for v in verses:
 		results.append({ 'verseNum' : v.number, 'vtext' : v.vtext, 'author' : v.author.name, 'authorid' : v.author.id, 'lang' : v.author.alang.name })
 
-	return HttpResponse(json.dumps(results), mimetype="application/json")
+	return HttpResponse(json.dumps(results), content_type="application/json")
 
 def getVerse(request):
 	try:
@@ -194,4 +194,4 @@ def getVerse(request):
 	for v in verses:
 		results.append({ 'verseNum' : v.number, 'vtext' : v.vtext, 'author' : v.author.name, 'authorid' : v.author.id, 'lang' : v.author.alang.name })
 
-	return HttpResponse(json.dumps(results), mimetype="application/json")
+	return HttpResponse(json.dumps(results), content_type="application/json")
