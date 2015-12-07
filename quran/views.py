@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.template.context import RequestContext
 from django.db.models import Q,Count, Min, Max, Sum
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.contrib.auth.models import User
 from quran.models import *
 import json
@@ -47,7 +49,7 @@ def viewLogin(request):
 def viewDiscuss(request):
 	context = RequestContext(request)
 
-	comments = Comment.objects.all().order_by('-date_published')
+	comments = Comment.objects.filter(enabled=True).order_by('-date_published')
 	context.update({ 'comments' : comments, })
 
 	if request.method == "POST":
@@ -157,6 +159,55 @@ def viewVerse(request, **Args):
 		context.update({ 'messages' : ["Invalid request, comment couldn't be saved" ], 'cSuccess' : cSuccess, })
 
 	return render_to_response("verse.html", context_instance=context)
+
+def viewSearch(request, **Args):
+	context = RequestContext(request)
+
+	try:
+		search = request.POST.get('search', Args.get('search'))
+	except:
+		search = False
+
+	try:
+		page = str(Args.get('page', 1)).strip('/')
+	except:
+		page = 1
+
+	pageNum = int(page);
+	pageSize = 20;
+
+	if(search != False):
+		titlesearch = Q(english_name__icontains=search) | Q(arabic_name__icontains=search) | Q(transliteration__icontains=search)
+		versesearch = Q(vtext__icontains=search)
+		commentsearch = Q(ctext_icontains=search)
+
+
+	try:
+		titleresult = Paginator(Chapter.objects.filter(titlesearch), pageSize).page(pageNum)
+	except:
+		titleresult = []
+
+	try:
+		verseresult = Paginator(Verse.objects.filter(versesearch), pageSize).page(pageNum)
+	except:
+		verseresult = []
+
+	try:
+		commentresult = Paginator(Comment.objects.filter(commentsearch), pageSize).page(pageNum)
+	except:
+		commentresult = []
+
+	context.update({
+		'titleresult' : titleresult,
+		'verseresult' : verseresult,
+		'commentresult' : commentresult,
+		'searchkey' : search,
+		'pageNum' : pageNum,
+		'pageSize': pageSize,
+		'totalresult' : sum(getattr(x, 'paginator', Paginator([], 0)).count for x in [titleresult, verseresult, commentresult])
+	})
+
+	return render_to_response("search.html", context_instance=context)
 
 def getChapter(request):
 

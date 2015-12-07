@@ -52,11 +52,11 @@
 			</div>
 			
 			<div id="search" class="pure-form">
-				<form class="frmsearch" method="post" id="frmsearch" action="/search">
+				<form class="frmsearch" method="post" id="frmsearch" action="/search/">
 					{% csrf_token %}
 					<span>
-						<input type="text" class="search"  placeholder="Search" name="search">
-						<input type="submit" class="btnsearch" value="Search" id="submit" name="submit">
+						<input type="text" class="search"  placeholder="Search keywords in Quran" name="search">
+						<input type="submit" class="btnsearch pure-button pure-button-primary" value="Search" id="submit" name="submit">
 					</span>
 				</form>
 			</div>

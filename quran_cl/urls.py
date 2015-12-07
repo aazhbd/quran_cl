@@ -20,5 +20,9 @@ urlpatterns = [
     url(r'^(?P<chap>\d+)/(?P<verse>\d+)/?$', views.viewVerse, name='verse'),
     url(r'^getverse$', views.getVerse, name='getverse'),
 
+    url(r'^search/(?P<search>.+?)/(?P<page>\d+)/?$', views.viewSearch, name='search'),
+    url(r'^search/(?P<search>.+?)/?$', views.viewSearch, name='search'),
+    url(r'^search/?$', views.viewSearch, name='search'),
+
     url(r'^admin/', admin.site.urls),
 ]
