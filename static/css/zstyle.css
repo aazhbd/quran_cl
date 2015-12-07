@@ -101,6 +101,8 @@ img {
 /* reports starts here */
 
 #reports{
+    clear: both;
+    position: relative;
     color:#000;
     width:auto;
     height:20px;
@@ -108,6 +110,7 @@ img {
     border: 1px solid #0f0;
     padding:5px;
     margin:3px;
+    z-index: 9999;
 }
 
 /* reports ends here */

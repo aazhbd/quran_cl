@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="Content-language" content="en" />
 	<meta name="author" content="Quran, aazhbd, aazhbd@yahoo.com" />
 	<meta name="Copyright" content="Quran, aazhbd, aazhbd@yahoo.com" />
 	<meta name="description" content="{% block description %}This site takes a humble attempt to provide a set of facilities for comprehensive research on Quran and available materials as well as allow discussions for better understanding.{% endblock %}" />
@@ -21,8 +20,8 @@
 	<link href="{% static 'css/msie.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
 	<![endif]-->
 
-	<script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
-	<script src="{% static "js/jquery.validate.min.js" %}"></script>
+	<script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+	<script src="{% static 'js/jquery.validate.min.js' %}"></script>
 
 	{% block scripttags %}{% endblock %}
 </head>
@@ -86,7 +85,7 @@
     <div id="contentbody">
 		{% if messages %}
 			{% for message in messages %}
-				<div id="reports">{{message}}</div>
+				<div id="reports">{{ message }}</div>
 			{% endfor %}
 		{% endif %}
 		

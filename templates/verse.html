@@ -83,80 +83,82 @@
 	</div>
 
 	{% for m in verse %}
-	<div class="commentBox"">
-	<p>
-		<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | {{m.vtext}}
-		<br />Language: {{m.author.alang}} - Source: {{m.author}}
-	</p>
-		<div id="verseTrans{{m.number}}" class="transV"></div>
-	</div>
-	{% endfor %}
+		<div class="commentBox">
+		<p>
+			<a href="/{{m.chapter.id}}/{{m.number}}/">{{m.chapter.id}}:{{m.number}}</a> | {{m.vtext}}
+			<br />Language: {{m.author.alang}} - Source: {{m.author}}
+		</p>
+			<div id="verseTrans{{m.number}}" class="transV"></div>
+		</div>
 
-	{% if request.user.is_authenticated %}
-	<form action="/{{ comment_form.cnum.value }}/{{ comment_form.vnum.value }}" method="post" class="pure-form pure-form-aligned" id="commentForm">
-		{% csrf_token %}
-		<fieldset>
-		<legend>Post your comment about this verse</legend>
-			<div class="pure-control-group">
-				<label for="id_comment_type">Comment type:</label>
-				<select id="id_comment_type" name="comment_type" class="pure-input-1-2">
-					<option selected>Translation</option>
-					<option>Explanation</option>
-					<option>Question</option>
-					<option>Comment</option>
-				</select>
-			</div>
+		{% if request.user.is_authenticated %}
+		<form action="/{{m.chapter.id}}/{{m.number}}/" method="post" class="pure-form pure-form-aligned" id="commentForm">
+			{% csrf_token %}
+			<fieldset>
+				<legend>Post your comment about this verse</legend>
+				<div class="pure-control-group">
+					<label for="id_comment_type">Comment type:</label>
+					<select id="id_comment_type" name="comment_type" class="pure-input-1-2">
+						<option selected>Translation</option>
+						<option>Explanation</option>
+						<option>Question</option>
+						<option>Comment</option>
+					</select>
+				</div>
 
-			<div class="pure-control-group">
-				<label for="comment">Comment: </label>
-				<textarea placeholder="Enter your comment" class="pure-input-1-2" name="comment" id="comment"></textarea>
-			</div>
+				<div class="pure-control-group">
+					<label for="comment">Comment: </label>
+					<textarea placeholder="Enter your comment" class="pure-input-1-2" name="comment" id="comment"></textarea>
+				</div>
 
-			<div class="pure-control-group">
-				<label for="hiddenRecaptcha" style="float: left;">Captcha:</label>
-				<div class="g-recaptcha" data-sitekey="6LfsqBATAAAAAPt_BXPWzWmlP0f22ydpdL_7iOsb" style="float: left; margin: 5px; "></div>
-				<input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
-			</div>
+				<div class="pure-control-group">
+					<label for="hiddenRecaptcha" style="float: left;">Captcha:</label>
+					<div class="g-recaptcha" data-sitekey="6LfsqBATAAAAAPt_BXPWzWmlP0f22ydpdL_7iOsb" style="float: left; margin: 5px; "></div>
+					<input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
+				</div>
 
-			<div class="pure-controls">
-				<label for="id_submit" class="pure-checkbox"></label>
-				<button type="submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Submit Comment</button>
-			</div>
-		</fieldset>
-	</form>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#commentForm").validate({
-				rules:{
-					comment_type:{ required: true },
-					comment:{ required: true, maxLength: 2000 },
-					"hiddenRecaptcha": {
-						required: function() {
-							if(grecaptcha.getResponse() == '') {
-								return true;
-							} else {
-								return false;
+				<div class="pure-controls">
+					<label for="id_submit" class="pure-checkbox"></label>
+					<button type="submit" id="id_submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Submit Comment</button>
+				</div>
+			</fieldset>
+		</form>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#commentForm").validate({
+					rules:{
+						comment_type:{ required: true },
+						comment:{ required: true, maxLength: 2000 },
+						"hiddenRecaptcha": {
+							required: function() {
+								if(grecaptcha.getResponse() == '') {
+									return true;
+								} else {
+									return false;
+								}
 							}
 						}
+					},
+					messages:{
+						comment_type: {
+							required: "Enter comment type",
+						},
+						comment: {
+							required: "Enter comment",
+						},
+						"hiddenRecaptcha": "The captcha is not validated."
 					}
-				},
-				messages:{
-					comment_type: {
-						required: "Enter comment type",
-					},
-					comment: {
-						required: "Enter comment",
-					},
-					"hiddenRecaptcha": "The captcha is not validated."
-				}
+				});
 			});
-		});
-	</script>
-	{% else %}
-	<div class="pure-form pure-form-aligned">
-		<a href="/login">login</a> to post comments or <a href="/signup">Signup</a>
-	</div>
-	{% endif %}
+		</script>
+		{% else %}
+		<div class="pure-form pure-form-aligned">
+			<a href="/login">login</a> to post comments or <a href="/signup">Signup</a>
+		</div>
+		{% endif %}
+	{% endfor %}
+
+
 
 	{% if comments %}
 	<h4>Discussions: </h4>
@@ -169,7 +171,7 @@
 				</a>
 			</div>
 			<p>
-				{{ c.ctext|truncatechars:280 }} <a href="/{{c.cnum}}/{{c.vnum}}/">More Details and Reply</a>
+				{{ c.ctext }}
 			</p>
 
 			<div class="verseAuth">

@@ -106,42 +106,33 @@ def viewChapter(request, **Args):
 
 def viewVerse(request, **Args):
 	context = RequestContext(request)
-
-	cSuccess = False
+	cSuccess = None
 
 	chapterNum = str(Args.get('chap')).strip('/')
 	verseNum = str(Args.get('verse')).strip('/')
-
 	cNum = str(chapterNum)
 	vNum = str(verseNum)
 
-	cf_init = dict(user=request.user.pk, vnum=vNum, cnum=cNum)
-
 	if(request.method=="POST"):
-		post = request.POST.copy()
+		ctext = request.POST.get('comment', None)
+		comment_type = request.POST.get('comment_type', None)
+		cuser = request.user
 
-		# comment_form = VerseCommentForm(request.POST, initial=cf_init)
-
-		if(comment_form.is_valid()):
+		if ctext != "" and comment_type != "":
 			try:
-				newComment = comment_form.save()
+				c = Comment(user=cuser, vnum=vNum, cnum=cNum, ctext=ctext, comment_type=comment_type)
+				c.save()
 				cSuccess = True
 			except:
-				context.update({ 'messages' : "comment save failed.", })
+				cSuccess = False
 				raise
 		else:
-			context.update({ 'messages' : "comment save failed.", })
-	else:
-		pass
-		# comment_form = VerseCommentForm(initial=cf_init)
-
+			cSuccess = False
 
 	context.update({ 'cnum' : cNum, 'vnum' : vNum })
-
 	context.update({ 'msg_body' : "Chapter " + cNum + " Verse " + vNum, })
 
 	f1 = Q(chapter=cNum) & Q(number=vNum) & Q(author__name='Original Text')
-
 	verse = Verse.objects.filter(f1)
 
 	context.update({ 'verse' : verse, })
@@ -160,8 +151,10 @@ def viewVerse(request, **Args):
 
 	context.update({ 'comments' : comments, })
 
-	if(cSuccess):
+	if cSuccess == True:
 		context.update({ 'messages' : ['Your comment has been posted successfully'], 'cSuccess' : cSuccess, })
+	elif cSuccess == False:
+		context.update({ 'messages' : ["Invalid request, comment couldn't be saved" ], 'cSuccess' : cSuccess, })
 
 	return render_to_response("verse.html", context_instance=context)
 
