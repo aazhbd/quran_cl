@@ -9,8 +9,6 @@
 <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#commentForm").validate();
-
 		$("input[name='langselector[]']").click(function() {
 			var clickData = $(this).val();
 
@@ -23,9 +21,9 @@
 			var data = {
 				authorName : clickData,
 				chapterNum : {{cnum}},
-			verseNum : {{vnum}},
-			'csrfmiddlewaretoken' : '{{ csrf_token }}',
-		};
+				verseNum : {{vnum}},
+				'csrfmiddlewaretoken' : '{{ csrf_token }}',
+			};
 
 			var url = "/getverse";
 
@@ -126,6 +124,17 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#commentForm").validate({
+					ignore: ".ignore",
+					groups: {
+						agree: "agree"
+					},
+					errorPlacement: function(error, element) {
+						if (element.attr("name") == "agree") {
+							error.insertAfter("#agree-label");
+						} else {
+							error.insertAfter(element);
+						}
+					},
 					rules:{
 						comment_type:{ required: true },
 						comment:{ required: true, maxLength: 2000 },
