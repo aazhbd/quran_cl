@@ -205,7 +205,6 @@ img {
 
 /* title ends here */
 
-
 /* subtitle starts here */
 
 .subtitle{
@@ -217,8 +216,6 @@ img {
 }
 
 /* subtitle ends here */
-
-
 
 /* body starts here */
 
@@ -254,8 +251,15 @@ img {
     padding: 4px;
 }
 
-/* body ends here */
+.commentBox p {
+    padding: 10px;
+}
 
+.transV {
+    padding: 0 10px;
+}
+
+/* body ends here */
 
 /* footer starts here*/
 
@@ -274,7 +278,6 @@ img {
 }
 
 /* footer ends here*/
-
 
 /* selectors */
 
