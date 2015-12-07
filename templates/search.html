@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% block title %} Search result for : {{searchkey}} {% endblock %}
+
+{% block description %} Quran, All translations in serveral languages, search key {{searchkey}} in Quran, {% endblock %}
+{% block keywords %} Quran, translations, several languages {% endblock %}
+
+{% block content %}
+<div class="homemsg">
+	{% if msg_body %}
+		<div class="title">{{msg_body}}</div>
+	{% endif %}
+</div>
+
+<h4>The search result for search key: {{searchkey}}</h4>
+
+{% if titleresult %}
+{% for m in titleresult %}
+<div class="verseTxt"><a href="/{{m.id}}/">Chapter: {{m.english_name}} - {{m.arabic_name}} - {{m.transliteration}}</a></div>
+<div class="verseBox" id="verse_{{m.id}}">
+	<div class="verseTxt"><a href="/{{m.id}}">View details of Chapter {{m.id}}</a></div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if verseresult %}
+<p>Total results: {{totalresult}}</p>
+{% for m in verseresult %}
+<div class="verseTxt"><a href="/{{m.chapter.id}}/{{m.number}}">Chapter: {{m.chapter.english_name}} - {{m.chapter.arabic_name}} - {{m.chapter.transliteration}}</a></div>
+<div class="verseBox" id="verse_{{m.id}}">
+	<div class="verseNum"><a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a></div>
+	<span class="verseTxt">{{m.vtext}}</span>
+	<span class="verseAuth"><a href="/{{m.chapter.id}}/{{m.number}}">{{m.author}}</a></span>
+	<span class="linkBtn"><a href="/{{m.chapter.id}}/{{m.number}}/">Details</a></span>
+</div>
+{% endfor %}
+{% endif %}
+
+
+{% if commentresult %}
+{% for m in commentresult %}
+<div class="verseBox" id="verse_{{m.id}}">
+	<div class="verseNum"><a href="/{{m.cnum}}/{{m.vnum}}/">{{m.cnum}} : {{m.vnum}}</a></div>
+	<span class="verseTxt">{{m.ctext}}</span>
+	<span class="linkBtn"><a href="/{{m.cnum}}/{{m.vnum}}/">Details</a></span>
+</div>
+{% endfor %}
+{% endif %}
+
+<div id="searchmore">
+<a href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next </a>
+{% if pageNum != 1  %}
+<a href='/search/{{searchkey}}/{{pageNum|add:"-1"}}'> Previous </a>
+{% endif %}
+</div>
+
+
+{% endblock %}
