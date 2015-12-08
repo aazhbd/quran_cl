@@ -111,6 +111,10 @@
 			| <a href="/info">Info</a>
 		</p>
     </div>
+	<script type="text/javascript">
+		$('body').append($('<div class="ajax-loading"/>').css({'background-image': 'url({% static "images/loading.gif" %})', position: 'fixed', top: 0, left: 0, height: '100%', width: '100%', 'z-index': 1000, 'background-color': "rgb( 255, 255, 255, .8 )", 'background-position': '50% 50%', 'background-repeat': 'no-repeat'}).hide());
+		$(document).ajaxStart(function() { $('.ajax-loading').show(); }).ajaxStop(function() { $('.ajax-loading').hide(); });
+	</script>
 </body>
 </html>
 <!--
