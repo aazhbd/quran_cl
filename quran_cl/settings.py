@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'quran_db',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'articulatelogic',
+        'PASSWORD': 'pass#100',
         'HOST': 'localhost',
         'PORT': '3306',
     }
