@@ -15,7 +15,7 @@ import json
 
 def viewHome(request):
 	context = RequestContext(request)
-	context.update({ 'msg_body' : "All Chapters", })
+	context.update({ 'msg_body' : "The Holy Quran", })
 	chapters = Chapter.objects.all()
 	context.update({ 'chapters' : chapters, })
 	return render_to_response("home.html", context_instance=context)
@@ -131,8 +131,13 @@ def viewVerse(request, **Args):
 		else:
 			cSuccess = False
 
-	context.update({ 'cnum' : cNum, 'vnum' : vNum })
-	context.update({ 'msg_body' : "Chapter " + cNum + " Verse " + vNum, })
+	context.update({'cnum': cNum, 'vnum': vNum})
+
+	try:
+		chName = Chapter.objects.get(pk=cNum)
+		context.update({'msg_body': "Verse of the chapter " + cNum + " : " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ") Verse " + vNum, })
+	except:
+		context.update({'msg_body': "Chapter " + cNum + " Verse " + vNum, })
 
 	f1 = Q(chapter=cNum) & Q(number=vNum) & Q(author__name='Original Text')
 	verse = Verse.objects.filter(f1)
@@ -174,8 +179,8 @@ def viewSearch(request, **Args):
 		page = 1
 
 	search = search.strip()
-	pageNum = int(page);
-	pageSize = 40;
+	pageNum = int(page)
+	pageSize = 40
 
 	if(search != False):
 		titlesearch = Q(english_name__icontains=search) | Q(arabic_name__icontains=search) | Q(transliteration__icontains=search)
