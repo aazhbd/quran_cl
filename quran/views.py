@@ -198,6 +198,9 @@ def viewSearch(request, **Args):
 	except:
 		commentresult = []
 
+	totalentries = sum(getattr(x, 'paginator', Paginator([], 0)).count for x in [titleresult, verseresult, commentresult])
+	totalpages = int(totalentries / pageSize)
+
 	context.update({
 		'titleresult' : titleresult,
 		'verseresult' : verseresult,
@@ -205,7 +208,8 @@ def viewSearch(request, **Args):
 		'searchkey' : search,
 		'pageNum' : pageNum,
 		'pageSize': pageSize,
-		'totalresult' : sum(getattr(x, 'paginator', Paginator([], 0)).count for x in [titleresult, verseresult, commentresult])
+		'totalresult' : totalentries,
+		'totalpages' : totalpages
 	})
 
 	return render_to_response("search.html", context_instance=context)

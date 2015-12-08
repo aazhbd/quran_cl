@@ -51,11 +51,13 @@
 {% endif %}
 
 <div id="searchmore">
-	{% if pageNum != 1  %}
+	{% if pageNum > 1  %}
 		<a style="float: left;" href='/search/{{searchkey}}/{{pageNum|add:"-1"}}'>< Previous </a>
 	{% endif %}
 
-	<a style="float: right;" href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next ></a>
+	{% if pageNum <= totalpages %}
+		<a style="float: right;" href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next ></a>
+	{% endif %}
 </div>
 
 
