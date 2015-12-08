@@ -147,7 +147,7 @@ def viewVerse(request, **Args):
 
 	context.update({ 'authors' : authors, })
 
-	f2 = Q(cnum=cNum) & Q(vnum=vNum)
+	f2 = Q(cnum=cNum) & Q(vnum=vNum) & Q(enabled=True)
 
 	comments = Comment.objects.filter(f2)
 

@@ -233,7 +233,15 @@ img {
     font-weight: lighter;
     font-size: 1.55em;
     color: #1D62B3;
-    padding: .4em 0;
+    padding: 20px 0;
+}
+
+#backlinks {
+    padding: 10px;
+}
+
+.verseBox {
+    padding: 5px 10px;
 }
 
 .lowered_body {
