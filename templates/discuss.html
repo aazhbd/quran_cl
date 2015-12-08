@@ -27,7 +27,7 @@
 		{% if c.user.first_name != "" or c.user.last_name != "" %}
 			Posted by {{ c.user.first_name }} {{ c.user.last_name }}
 		{% else %}
-			Posted by{{ c.user }}
+			Posted by {{ c.user }}
 		{% endif %} on {{ c.date_published }}
 	</div>
 </div>

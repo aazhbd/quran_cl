@@ -12,46 +12,50 @@
 	{% endif %}
 </div>
 
-<h4>The search result for search key: {{searchkey}}</h4>
+<div class="title">The search result for search key: {{searchkey}}</div>
 
 {% if titleresult %}
-{% for m in titleresult %}
-<div class="verseTxt"><a href="/{{m.id}}/">Chapter: {{m.english_name}} - {{m.arabic_name}} - {{m.transliteration}}</a></div>
-<div class="verseBox" id="verse_{{m.id}}">
-	<div class="verseTxt"><a href="/{{m.id}}">View details of Chapter {{m.id}}</a></div>
-</div>
-{% endfor %}
+	{% for m in titleresult %}
+	<div class="commentBox">
+		<p>
+			Found in Chapter title: <a href="/{{m.id}}/">Chapter: {{m.english_name}} - {{m.arabic_name}} - {{m.transliteration}}</a> <a href="/{{m.id}}">View details of Chapter {{m.id}}</a>
+		</p>
+	</div>
+	{% endfor %}
 {% endif %}
 
 {% if verseresult %}
-<p>Total results: {{totalresult}}</p>
-{% for m in verseresult %}
-<div class="verseTxt"><a href="/{{m.chapter.id}}/{{m.number}}">Chapter: {{m.chapter.english_name}} - {{m.chapter.arabic_name}} - {{m.chapter.transliteration}}</a></div>
-<div class="verseBox" id="verse_{{m.id}}">
-	<div class="verseNum"><a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a></div>
-	<span class="verseTxt">{{m.vtext}}</span>
-	<span class="verseAuth"><a href="/{{m.chapter.id}}/{{m.number}}">{{m.author}}</a></span>
-	<span class="linkBtn"><a href="/{{m.chapter.id}}/{{m.number}}/">Details</a></span>
-</div>
-{% endfor %}
+	<p>Total results in verses: {{totalresult}}</p>
+	{% for m in verseresult %}
+
+	<div class="commentBox">
+		<p>
+			Chapter: <a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> <a href="/{{m.chapter.id}}/{{m.number}}"> {{m.chapter.english_name}} - {{m.chapter.arabic_name}} - {{m.chapter.transliteration}}</a> | {{m.vtext}} <a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a>
+			<br /><a href="/{{m.chapter.id}}/{{m.number}}">{{m.author}}</a>
+		</p>
+	</div>
+
+	{% endfor %}
 {% endif %}
 
 
 {% if commentresult %}
-{% for m in commentresult %}
-<div class="verseBox" id="verse_{{m.id}}">
-	<div class="verseNum"><a href="/{{m.cnum}}/{{m.vnum}}/">{{m.cnum}} : {{m.vnum}}</a></div>
-	<span class="verseTxt">{{m.ctext}}</span>
-	<span class="linkBtn"><a href="/{{m.cnum}}/{{m.vnum}}/">Details</a></span>
-</div>
-{% endfor %}
+	{% for m in commentresult %}
+	<div class="commentBox">
+		<p>
+			Discussion at: <a href="/{{m.cnum}}/{{m.vnum}}/">{{m.cnum}} : {{m.vnum}}</a> | {{m.ctext}} <a href="/{{m.cnum}}/{{m.vnum}}/">Details</a>
+			<br />Language: {{m.author.alang}} - Source: {{m.author}}
+		</p>
+	</div>
+	{% endfor %}
 {% endif %}
 
 <div id="searchmore">
-<a href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next </a>
-{% if pageNum != 1  %}
-<a href='/search/{{searchkey}}/{{pageNum|add:"-1"}}'> Previous </a>
-{% endif %}
+	{% if pageNum != 1  %}
+		<a style="float: left;" href='/search/{{searchkey}}/{{pageNum|add:"-1"}}'>< Previous </a>
+	{% endif %}
+
+	<a style="float: right;" href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next ></a>
 </div>
 
 

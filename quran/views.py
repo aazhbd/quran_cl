@@ -173,8 +173,9 @@ def viewSearch(request, **Args):
 	except:
 		page = 1
 
+	search = search.strip()
 	pageNum = int(page);
-	pageSize = 20;
+	pageSize = 40;
 
 	if(search != False):
 		titlesearch = Q(english_name__icontains=search) | Q(arabic_name__icontains=search) | Q(transliteration__icontains=search)
