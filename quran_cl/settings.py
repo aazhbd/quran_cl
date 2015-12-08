@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'quran_cl.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quran_db',
+        'NAME': 'quran_conveylive_com',
         'USER': 'articulatelogic',
         'PASSWORD': 'pass#100',
         'HOST': 'localhost',
