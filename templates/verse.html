@@ -37,7 +37,7 @@
 					{
 						var tmp = $('#verseTrans' + result[i].verseNum).html();
 
-						var str = '<div class="author-'  + result[i].authorid + '"><span class="verseTxt">' + result[i].vtext + '</span><div class="verseAuth">Language: ' + result[i].lang + ' - Source: ' + result[i].author + '</div>';
+						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span class="verseTxt">' + result[i].vtext + '</span></div>';
 
 						$('#verseTrans' + result[i].verseNum).html(tmp + str);
 					}
@@ -82,10 +82,9 @@
 
 	{% for m in verse %}
 		<div class="commentBox">
-		<p>
-			<a href="/{{m.chapter.id}}/{{m.number}}/">{{m.chapter.id}}:{{m.number}}</a> | {{m.vtext}}
-			<br />Language: {{m.author.alang}} - Source: {{m.author}}
-		</p>
+			<p>
+				<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}] {{m.vtext}} &nbsp; [ <a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a> ]
+			</p>
 			<div id="verseTrans{{m.number}}" class="transV"></div>
 		</div>
 
