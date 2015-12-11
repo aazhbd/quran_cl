@@ -97,10 +97,9 @@ img {
 
 /* end head */
 
-
 /* reports starts here */
 
-#reports{
+#reports {
     clear: both;
     position: relative;
     color: #000;
@@ -117,7 +116,7 @@ img {
 
 /* error starts here */
 
-#errors{
+#errors {
     color:#000;
     width:auto;
     height:20px;
@@ -126,23 +125,22 @@ img {
     padding:5px;
     margin:3px;
 }
-/* error ends here */
 
+/* error ends here */
 
 /* logo starts here */
 
-#logo{
+#logo {
     float:left;
     height:37px;
-    max-width: 220px;
+    max-width: 250px;
 }
 
 /* logo ends here */ 
 
-
 /* banner starts here */
 
-#banner{
+#banner {
     width: 91%;
     margin: auto;
     padding: 0;
@@ -150,7 +148,7 @@ img {
 
 #search {
     float: left;
-    width: 28%;
+    width: 37%;
     padding: 10px 0;
 }
 
@@ -168,22 +166,19 @@ img {
 
 .btnsearch {
     width: 22%;
-    padding: 0;
-    padding: 4px;
 }
 
 /* banner ends here */
 
-
-#topright{
+#topright {
     float: right;
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 /* contentbody starts here */
 
 #contentbody {
-    margin: 82px auto 0;
+    margin: 100px auto 0;
     background: #fff no-repeat;
 	padding: 0 20px;
     overflow: auto;
@@ -194,7 +189,6 @@ img {
 }
 
 /* contentbody ends here */
-
 
 /* title starts here */
 
@@ -221,7 +215,7 @@ img {
 /* body starts here */
 
 .body{
-    color:#000;
+    color: #000;
     text-align: justify;
     position: relative;
     overflow: auto;
@@ -234,7 +228,7 @@ img {
     font-weight: lighter;
     font-size: 1.55em;
     color: #336699;
-    padding: 20px 0;
+    padding: 20px 5px;
 }
 
 #backlinks {
@@ -281,7 +275,7 @@ img {
     padding: 10px;
 }
 
-#footer p{
+#footer p {
     margin: 0 auto;
     text-align: center;
 }
@@ -301,7 +295,6 @@ img {
     position: fixed;
     top: 91px;
     margin: 0 auto;
-    overflow: auto;
     z-index: 999;
 }
 
