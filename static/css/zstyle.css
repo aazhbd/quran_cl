@@ -141,33 +141,35 @@ img {
 /* banner starts here */
 
 #banner {
-    width: 91%;
-    margin: auto;
+    /*width: 91%;*/
+    margin: auto 4%;
     padding: 0;
 }
 
 #search {
     float: left;
-    width: 30%;
+    width: 37%;
     padding: 10px 0;
 }
 
 .search {
 	float: left;
 	padding: 4px 0;
-	width: 75%;
+	width: 73%;
 }
 
 #frmsearch {
     width: 100%;
-    padding: 2px;
+    padding: 0;
+    margin: 0;
     outline: none;
 }
 
 .btnsearch {
-    /*background: url('/static/images/search.png') center no-repeat;*/
+    float: left;
     height: 32px;
     width: 32px;
+    margin: 0;
 }
 
 /* banner ends here */
