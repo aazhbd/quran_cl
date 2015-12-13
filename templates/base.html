@@ -31,7 +31,7 @@
     <div id="contentheader">
         <div id="banner">
 			<a href="/home">
-            	<img src="{% static 'images/logo_quran_conveylive.png' %}" id="logo" />
+            	<img alt="Quran conveylive logo" src="{% static 'images/logo_quran_conveylive.png' %}" id="logo" />
 			</a>
 
 			{% block contentheader %}
@@ -52,7 +52,7 @@
 				<form class="frmsearch" method="post" id="frmsearch" action="/search/">
 					{% csrf_token %}
 					<input type="text" class="search"  placeholder="Search keywords in Quran" name="search">
-					<button type="submit" class="btnsearch"><img src="{% static 'images/search.png' %}" height="22"/></button>
+					<button type="submit" class="btnsearch"><img alt="Quran conveylive search" src="{% static 'images/search.png' %}" height="22"/></button>
 				</form>
 			</div>
 			{% endblock %}
