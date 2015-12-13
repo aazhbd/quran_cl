@@ -12,7 +12,7 @@
 			var clickData = $(this).val();
 
 			if(!$(this).is(':checked')) {
-				var author_id = $(this).attr('author');
+				var author_id = $(this).attr('data-author');
 				$('.author-' + author_id).remove();
 				return;
 			}
@@ -20,8 +20,8 @@
 			var data = {
 				authorName : clickData,
 				chapterNum : {{cnum}},
-			'csrfmiddlewaretoken' : '{{ csrf_token }}',
-		};
+				'csrfmiddlewaretoken' : '{{ csrf_token }}',
+			};
 
 			var url = "/getchapter";
 
@@ -50,14 +50,14 @@
 
 {% block languageselectors %}
 <div id="selectors">
-	<form action="" method="post" class="pure-form">
+	<form action="#" method="post" class="pure-form">
 		<fieldset>
 			<legend>Choose from the set of available data:</legend>
 
 			{% for m in authors %}
 			<div class="choices">
-				<label for="langselect{{m}}" class="pure-checkbox">
-					<input type="checkbox" name="langselector[]" author="{{m.id}}" value="{{m}}" id="langselect{{m}}" /> {{m.alang}} - {{m}}
+				<label for="langselect{{m.id}}" class="pure-checkbox">
+					<input type="checkbox" name="langselector[]" data-author="{{m.id}}" value="{{m}}" id="langselect{{m.id}}" /> {{m.alang}} - {{m}}
 				</label>
 			</div>
 			{% endfor %}
