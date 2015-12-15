@@ -172,6 +172,11 @@ img {
     margin: 0;
 }
 
+#searchico {
+    height: 19px;
+    padding: 2px;
+}
+
 /* banner ends here */
 
 #topright {
