@@ -12,7 +12,11 @@
 	{% endif %}
 </div>
 
+{% if searchkey %}
 <div class="title">The search result for search key: {{searchkey}}</div>
+{% else %}
+<div class="title">Invalid search key</div>
+{% endif %}
 
 {% if titleresult %}
 	{% for m in titleresult %}

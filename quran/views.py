@@ -167,6 +167,7 @@ def viewVerse(request, **Args):
 
 	return render_to_response("verse.html", context_instance=context)
 
+
 def viewSearch(request, **Args):
 	context = RequestContext(request)
 
@@ -183,27 +184,30 @@ def viewSearch(request, **Args):
 	search = search.strip()
 	pageNum = int(page)
 	pageSize = 40
+	titleresult = []
+	verseresult = []
+	commentresult = []
 
-	if(search != False):
+	if search and search != "":
 		titlesearch = Q(english_name__icontains=search) | Q(arabic_name__icontains=search) | Q(transliteration__icontains=search)
 		versesearch = Q(vtext__icontains=search)
 		commentsearch = Q(ctext_icontains=search)
 
+		try:
+			titleresult = Paginator(Chapter.objects.filter(titlesearch), pageSize).page(pageNum)
+		except:
+			titleresult = []
 
-	try:
-		titleresult = Paginator(Chapter.objects.filter(titlesearch), pageSize).page(pageNum)
-	except:
-		titleresult = []
+		try:
+			verseresult = Paginator(Verse.objects.filter(versesearch), pageSize).page(pageNum)
+		except:
+			verseresult = []
 
-	try:
-		verseresult = Paginator(Verse.objects.filter(versesearch), pageSize).page(pageNum)
-	except:
-		verseresult = []
+		try:
+			commentresult = Paginator(Comment.objects.filter(commentsearch), pageSize).page(pageNum)
+		except:
+			commentresult = []
 
-	try:
-		commentresult = Paginator(Comment.objects.filter(commentsearch), pageSize).page(pageNum)
-	except:
-		commentresult = []
 
 	totalentries = sum(getattr(x, 'paginator', Paginator([], 0)).count for x in [titleresult, verseresult, commentresult])
 	totalpages = int(totalentries / pageSize)
