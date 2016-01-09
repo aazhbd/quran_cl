@@ -78,6 +78,16 @@
 
 	<div id="backlinks">
 		<a href="/home">Home </a> > <a href="/{{cnum}}">Chapter {{cnum}} </a> > <a href="/{{cnum}}/{{vnum}}">Verse {{vnum}}</a>
+
+		<div style="float:right;">
+			{% if pprevious %}
+			<a href="/{{cnum}}/{{vnum|add:-1}}/">Previous Verse</a>
+			{% endif %}
+			&nbsp;&nbsp;&nbsp;
+			{% if pnext %}
+			<a href="/{{cnum}}/{{vnum|add:1}}/">Next Verse</a>
+			{% endif %}
+		</div>
 	</div>
 
 	{% for m in verse %}
