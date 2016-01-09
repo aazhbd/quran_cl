@@ -56,11 +56,11 @@
 
 <div id="searchmore">
 	{% if pageNum > 1  %}
-		<a style="float: left;" href='/search/{{searchkey}}/{{pageNum|add:"-1"}}'>< Previous </a>
+		<a class="pure-button pure-button-primary" style="float: left;" href='/search/{{searchkey}}/{{pageNum|add:"-1"}}'>< Previous </a>
 	{% endif %}
 
 	{% if pageNum <= totalpages %}
-		<a style="float: right;" href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next ></a>
+		<a class="pure-button pure-button-primary" style="float: right;" href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next ></a>
 	{% endif %}
 </div>
 
