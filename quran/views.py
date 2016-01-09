@@ -85,7 +85,7 @@ def viewChapter(request, **Args):
 	context = RequestContext(request)
 
 	chapterNum = str(Args.get('chap')).strip('/')
-	cNum = str(chapterNum)
+	cNum = int(chapterNum)
 	context.update({ 'cnum' : cNum, })
 
 	try:
