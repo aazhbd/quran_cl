@@ -165,6 +165,22 @@ def viewVerse(request, **Args):
 	elif cSuccess == False:
 		context.update({ 'messages' : ["Invalid request, comment couldn't be saved" ], 'cSuccess' : cSuccess, })
 
+	cdetail = Chapter.objects.get(pk=chapterNum)
+	if cdetail.total_verses:
+		total_verse = cdetail.total_verses
+
+		pnext = False
+		if (int(verseNum) < int(total_verse)):
+			pnext = True
+
+		pprevious = False
+		if int(verseNum) > 1:
+			pprevious = True
+
+		context.update({'pnext': pnext, 'pprevious': pprevious, })
+	else:
+		context.update({'pnext': False, 'pprevious': False, })
+
 	return render_to_response("verse.html", context_instance=context)
 
 
