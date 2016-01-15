@@ -1,4 +1,9 @@
-
+"""
+ An open source web application development framework for PHP 5.
+ @author        ArticulateLogic Labs
+ @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
+ @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
+"""
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
