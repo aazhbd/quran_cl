@@ -201,12 +201,15 @@ def viewSearch(request, **Args):
 	try:
 		search = request.POST.get('search', Args.get('search'))
 	except:
-		search = False
+		search = ""
 
 	try:
 		page = str(Args.get('page', 1)).strip('/')
 	except:
 		page = 1
+
+	if search == None:
+		search = ""
 
 	search = search.strip()
 	pageNum = int(page)
