@@ -247,7 +247,6 @@ def viewSearch(request, **Args):
 	return render_to_response("search.html", context_instance=context)
 
 def getChapter(request):
-
 	try:
 		authorName = request.POST.get('authorName', False)
 		chapterNum = request.POST.get('chapterNum', False)
@@ -259,9 +258,8 @@ def getChapter(request):
 	verses = Verse.objects.filter(f1)
 
 	results = []
-
 	for v in verses:
-		results.append({ 'verseNum' : v.number, 'vtext' : v.vtext, 'author' : v.author.name, 'authorid' : v.author.id, 'lang' : v.author.alang.name })
+		results.append({ 'verseNum' : v.number, 'vtext' : unicodedata.normalize('NFC', v.vtext), 'author' : v.author.name, 'authorid' : v.author.id, 'lang' : v.author.alang.name })
 
 	return HttpResponse(json.dumps(results), content_type="application/json")
 
@@ -278,7 +276,6 @@ def getVerse(request):
 	verses = Verse.objects.filter(f1)
 
 	results = []
-
 	for v in verses:
 		results.append({ 'verseNum' : v.number, 'vtext' : unicodedata.normalize('NFC', v.vtext), 'author' : v.author.name, 'authorid' : v.author.id, 'lang' : v.author.alang.name })
 
