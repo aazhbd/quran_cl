@@ -102,6 +102,9 @@ def viewChapter(request, **Args):
 	v = Q(chapter=cNum) & Q(author__name='Original Text')
 	full_chap = Verse.objects.filter(v).order_by('number')
 
+	for content in full_chap:
+		content.vtext = unicodedata.normalize('NFC', content.vtext)
+
 	context.update({ 'full_chap' : full_chap, })
 
 	auths = Verse.objects.filter(chapter=cNum).values('author').distinct()
