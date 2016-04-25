@@ -261,7 +261,7 @@ img {
     -moz-border-radius: 0.2em;
     -webkit-border-radius: 0.2em;
     margin: 10px auto;
-    padding: 4px;
+    padding: 10px 4px;
 }
 
 .commentBox p {
@@ -269,7 +269,7 @@ img {
 }
 
 .transV {
-    padding: 0 10px;
+    padding: 4px 10px;
 }
 
 /* body ends here */
