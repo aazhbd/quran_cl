@@ -1,6 +1,5 @@
 """
- An open source web application development framework for PHP 5.
- @author        ArticulateLogic Labs
+ Quran
  @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
  @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
 """
