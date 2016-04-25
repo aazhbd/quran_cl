@@ -20,7 +20,7 @@
 			var data = {
 				authorName : clickData,
 				chapterNum : {{cnum}},
-				'csrfmiddlewaretoken' : '{{ csrf_token }}',
+				'csrfmiddlewaretoken' : '{{ csrf_token }}'
 			};
 
 			var url = "/getchapter";
@@ -39,7 +39,7 @@
 
 						$('#verseTrans' + result[i].verseNum).html(tmp + str);
 					}
-				},
+				}
 			};
 
 			xhr = $.ajax(args);

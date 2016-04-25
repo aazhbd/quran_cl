@@ -22,7 +22,7 @@
 				authorName : clickData,
 				chapterNum : {{cnum}},
 				verseNum : {{vnum}},
-				'csrfmiddlewaretoken' : '{{ csrf_token }}',
+				'csrfmiddlewaretoken' : '{{ csrf_token }}'
 			};
 
 			var url = "/getverse";
@@ -31,14 +31,11 @@
 				type : "POST",
 				url : url,
 				data : data,
-
 				success : function(result) {
 					for(i = 0; i < result.length; i++)
 					{
 						var tmp = $('#verseTrans' + result[i].verseNum).html();
-
 						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span class="verseTxt">' + result[i].vtext + '</span></div>';
-
 						$('#verseTrans' + result[i].verseNum).html(tmp + str);
 					}
 				},
@@ -55,7 +52,6 @@
 	<form action="#" method="post" class="pure-form">
 		<fieldset>
 			<legend>Choose from the set of available data:</legend>
-
 			{% for m in authors %}
 			<div class="choices">
 				<label for="langselect{{m.id}}" class="pure-checkbox">
@@ -75,10 +71,8 @@
 			<h4>{{msg_body}}</h4>
 		{% endif %}
 	</div>
-
 	<div id="backlinks">
 		<a href="/home">Home </a> > <a href="/{{cnum}}">Chapter {{cnum}} </a> > <a href="/{{cnum}}/{{vnum}}">Verse {{vnum}}</a>
-
 		<div style="float:right;">
 			{% if pprevious %}
 			<a class="pure-button pure-button-primary" href="/{{cnum}}/{{vnum|add:-1}}/">Previous Verse</a>
@@ -100,7 +94,6 @@
 			</div>
 			<div id="verseTrans{{m.number}}" class="transV"></div>
 		</div>
-
 		{% if request.user.is_authenticated %}
 		<form action="/{{m.chapter.id}}/{{m.number}}/" method="post" class="pure-form pure-form-aligned" id="commentForm">
 			{% csrf_token %}
@@ -115,18 +108,15 @@
 						<option>Comment</option>
 					</select>
 				</div>
-
 				<div class="pure-control-group">
 					<label for="comment">Comment: </label>
 					<textarea placeholder="Enter your comment" class="pure-input-1-2" name="comment" id="comment"></textarea>
 				</div>
-
 				<div class="pure-control-group">
 					<label for="hiddenRecaptcha" style="float: left;">Captcha:</label>
 					<div class="g-recaptcha" data-sitekey="6Ldf0xITAAAAAO1PqrVe3ICOGgRoomqhcV-3-zo1" style="float: left; margin: 5px;"></div>
 					<input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
 				</div>
-
 				<div class="pure-controls">
 					<label for="id_submit" class="pure-checkbox"></label>
 					<button type="submit" id="id_submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Submit Comment</button>
@@ -152,20 +142,16 @@
 						comment:{ required: true, maxLength: 2000 },
 						"hiddenRecaptcha": {
 							required: function() {
-								if(grecaptcha.getResponse() == '') {
-									return true;
-								} else {
-									return false;
-								}
+								return (grecaptcha.getResponse() == '');
 							}
 						}
 					},
 					messages:{
 						comment_type: {
-							required: "Enter comment type",
+							required: "Enter comment type"
 						},
 						comment: {
-							required: "Enter comment",
+							required: "Enter comment"
 						},
 						"hiddenRecaptcha": "The captcha is not validated."
 					}
@@ -179,8 +165,6 @@
 		{% endif %}
 	{% endfor %}
 
-
-
 	{% if comments %}
 	<h4>Discussions: </h4>
 		{% for c in comments %}
@@ -188,11 +172,9 @@
 			<div class="subtitle">
 				A {{ c.comment_type }} on verse <a href="/{{c.cnum}}/{{c.vnum}}/">{{ c.cnum }}:{{ c.vnum }}</a>
 			</div>
-
 			<p>
 				{{ c.ctext }}
 			</p>
-
 			<div class="verseAuth">
 				{% if c.user.first_name != "" or c.user.last_name != "" %}
 					{{ c.user.first_name }} {{ c.user.last_name }}
