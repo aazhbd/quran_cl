@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="author" content="Quran, aazhbd, aazhbd@yahoo.com" />
 	<meta name="Copyright" content="Quran, aazhbd, aazhbd@yahoo.com" />
 	<meta name="description" content="{% block description %}This site takes a humble attempt to provide a set of facilities for comprehensive research on Quran and available materials as well as allow discussions for better understanding.{% endblock %}" />
@@ -11,8 +11,7 @@
 	<meta name="robots" content="index, follow, I followed" />
     
     <title>Quran - {% block title %} Home {% endblock %}</title>
-	<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    
+	<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}" />
     <link href="{% static 'css/zstyle.css' %}" rel="stylesheet" type="text/css" media="screen" />
 	<link href="{% static 'css/forms.css' %}" rel="stylesheet" type="text/css" media="screen" />
 	<link href="{% static 'css/menus.css' %}" rel="stylesheet" type="text/css" media="screen" />
@@ -20,10 +19,8 @@
 	<!--[if lte IE 6]>
 	<link href="{% static 'css/msie.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
 	<![endif]-->
-
-	<script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
-	<script src="{% static 'js/jquery.validate.min.js' %}"></script>
-
+	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.validate.min.js' %}"></script>
 	{% block scripttags %}{% endblock %}
 </head>
 
@@ -33,7 +30,6 @@
 			<a href="/home">
             	<img alt="Quran conveylive logo" src="{% static 'images/logo_quran_conveylive.png' %}" id="logo" />
 			</a>
-
 			{% block contentheader %}
 			<div id="navigatemenu">
 				<div class="pure-menu pure-menu-horizontal">
@@ -47,18 +43,16 @@
 					</ul>
 				</div>
 			</div>
-			
 			<div id="search" class="pure-form">
 				<form class="frmsearch" method="post" id="frmsearch" action="/search/">
 					{% csrf_token %}
-					<input type="text" class="search"  placeholder="Search keywords in Quran" value="{{searchkey}}" name="search">
+					<input type="text" class="search"  placeholder="Search keywords in Quran" value="{{searchkey}}" name="search" />
 					<button type="submit" class="btnsearch">
 						<img alt="Quran conveylive search" src="{% static 'images/search.png' %}"  id="searchico" />
 					</button>
 				</form>
 			</div>
 			{% endblock %}
-			
 			<div id="topright">
 				{% if not user.is_authenticated %}
 					<a href="/login">Login</a> <br />
@@ -73,39 +67,33 @@
 					<br /><a href="/logout">Logout</a>
 				{% endif %}
 			</div>
-
         </div>
     </div>
-    
     <div id="contentbody">
 		{% if messages %}
 			{% for message in messages %}
 				<div id="reports">{{ message }}</div>
 			{% endfor %}
 		{% endif %}
-		
 		{% block languageselectors %}{% endblock %}
-
 		{% if title %}
         <h2 class="title">
 			{{ title }}
 		</h2>
 		{% endif %}
-
 		<div class="body">
 			{% block content %}This page is under construction.{% endblock %}
 		</div>
     </div>
-    
     <div id="footer">
         <p>
 			&copy; 2013 - 2015 <a href="mailto:aazhbd@yahoo.com">AAZ H</a> | <a href="http://www.articulatelogic.com/">ArticulateLogic.com</a>
-			| <a href="/home">Home</a>
-			| <a href="/discuss">Discussion</a>
-			| <a href="/info">Info</a>
+			| &nbsp;<a href="/home">Home</a>
+			| &nbsp;<a href="/discuss">Discussion</a>
+			| &nbsp;<a href="/info">Info</a>
 		</p>
     </div>
-	<script>
+	<script type="text/javascript">
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -125,7 +113,6 @@
 /**
 * Quran Template.
 *
-* @author        ArticulateLogic Labs
 * @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
 * @copyright     Copyright (c)2013-2015 ArticulateLogic Labs
 * @link          http://www.articulatelogic.com
