@@ -186,21 +186,19 @@
 		{% for c in comments %}
 		<div class="commentBox">
 			<div class="subtitle">
-				A {{c.comment_type}} on verse
-				<a href="/{{c.cnum}}/{{c.vnum}}/">
-					{{c.cnum}}:{{c.vnum}}
-				</a>
+				A {{ c.comment_type }} on verse <a href="/{{c.cnum}}/{{c.vnum}}/">{{ c.cnum }}:{{ c.vnum }}</a>
 			</div>
+
 			<p>
 				{{ c.ctext }}
 			</p>
 
 			<div class="verseAuth">
 				{% if c.user.first_name != "" or c.user.last_name != "" %}
-					Posted by {{ c.user.first_name }} {{ c.user.last_name }}
+					{{ c.user.first_name }} {{ c.user.last_name }}
 				{% else %}
-					Posted by{{ c.user }}
-				{% endif %} on {{ c.date_published }}
+					{{ c.user }}
+				{% endif %} posted on {{ c.date_published }}
 			</div>
 		</div>
 		{% endfor %}
