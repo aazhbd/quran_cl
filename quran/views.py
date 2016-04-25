@@ -1,5 +1,5 @@
 """
- Quran
+ The Holy Quran
  @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
  @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
 """
@@ -117,28 +117,28 @@ def viewChapter(request, **Args):
 
 def viewVerse(request, **Args):
 	context = RequestContext(request)
-	cSuccess = None
+	c_success = None
 
 	chapterNum = str(Args.get('chap')).strip('/')
 	verseNum = str(Args.get('verse')).strip('/')
 	cNum = str(chapterNum)
 	vNum = str(verseNum)
 
-	if(request.method=="POST"):
-		ctext = request.POST.get('comment', None)
-		comment_type = request.POST.get('comment_type', None)
+	if request.method=="POST":
+		ctext = request.POST.get('comment', "")
+		comment_type = request.POST.get('comment_type', "")
 		cuser = request.user
 
 		if ctext != "" and comment_type != "":
 			try:
 				c = Comment(user=cuser, vnum=vNum, cnum=cNum, ctext=ctext, comment_type=comment_type)
 				c.save()
-				cSuccess = True
+				context.update({ 'messages' : ['Your comment has been posted successfully'], 'cSuccess' : c_success, })
 			except:
-				cSuccess = False
+				context.update({ 'messages' : ["Invalid request, comment couldn't be saved" ], 'cSuccess' : c_success, })
 				raise
 		else:
-			cSuccess = False
+			context.update({ 'messages' : ["Invalid request, comment couldn't be saved" ], 'cSuccess' : c_success, })
 
 	context.update({'cnum': cNum, 'vnum': vNum})
 
@@ -148,8 +148,7 @@ def viewVerse(request, **Args):
 	except:
 		context.update({'msg_body': "Chapter " + cNum + " Verse " + vNum, })
 
-	f1 = Q(chapter=cNum) & Q(number=vNum) & Q(author__name='Original Text')
-	verse = Verse.objects.filter(f1)
+	verse = Verse.objects.filter(Q(chapter=cNum) & Q(number=vNum) & Q(author__name='Original Text'))
 
 	for v in verse:
 		v.vtext = unicodedata.normalize('NFC', v.vtext)
@@ -164,23 +163,15 @@ def viewVerse(request, **Args):
 
 	context.update({ 'authors' : authors, })
 
-	f2 = Q(cnum=cNum) & Q(vnum=vNum) & Q(enabled=True)
-
-	comments = Comment.objects.filter(f2)
-
+	comments = Comment.objects.filter(Q(cnum=cNum) & Q(vnum=vNum) & Q(enabled=True))
 	context.update({ 'comments' : comments, })
-
-	if cSuccess == True:
-		context.update({ 'messages' : ['Your comment has been posted successfully'], 'cSuccess' : cSuccess, })
-	elif cSuccess == False:
-		context.update({ 'messages' : ["Invalid request, comment couldn't be saved" ], 'cSuccess' : cSuccess, })
 
 	cdetail = Chapter.objects.get(pk=chapterNum)
 	if cdetail.total_verses:
 		total_verse = cdetail.total_verses
 
 		pnext = False
-		if (int(verseNum) < int(total_verse)):
+		if int(verseNum) < int(total_verse):
 			pnext = True
 
 		pprevious = False
@@ -196,21 +187,20 @@ def viewVerse(request, **Args):
 
 def viewSearch(request, **Args):
 	context = RequestContext(request)
-
 	try:
 		search = request.POST.get('search', Args.get('search'))
 	except:
 		search = ""
+
+	if search == None:
+		search = ""
+	search = search.strip()
 
 	try:
 		page = str(Args.get('page', 1)).strip('/')
 	except:
 		page = 1
 
-	if search == None:
-		search = ""
-
-	search = search.strip()
 	pageNum = int(page)
 	pageSize = 40
 	titleresult = []
@@ -221,7 +211,6 @@ def viewSearch(request, **Args):
 		titlesearch = Q(english_name__icontains=search) | Q(arabic_name__icontains=search) | Q(transliteration__icontains=search)
 		versesearch = Q(vtext__icontains=search)
 		commentsearch = Q(ctext_icontains=search)
-
 		try:
 			titleresult = Paginator(Chapter.objects.filter(titlesearch), pageSize).page(pageNum)
 		except:
@@ -236,7 +225,6 @@ def viewSearch(request, **Args):
 			commentresult = Paginator(Comment.objects.filter(commentsearch), pageSize).page(pageNum)
 		except:
 			commentresult = []
-
 
 	totalentries = sum(getattr(x, 'paginator', Paginator([], 0)).count for x in [titleresult, verseresult, commentresult])
 	totalpages = int(totalentries / pageSize)
@@ -261,13 +249,17 @@ def getChapter(request):
 	except:
 		raise
 
-	f1 = Q(chapter=chapterNum) & Q(author__name=authorName)
-
-	verses = Verse.objects.filter(f1)
+	verses = Verse.objects.filter(Q(chapter=chapterNum) & Q(author__name=authorName))
 
 	results = []
 	for v in verses:
-		results.append({ 'verseNum' : v.number, 'vtext' : unicodedata.normalize('NFC', v.vtext), 'author' : v.author.name, 'authorid' : v.author.id, 'lang' : v.author.alang.name })
+		results.append({
+			'verseNum' : v.number,
+			'vtext' : unicodedata.normalize('NFC', v.vtext),
+			'author' : v.author.name,
+			'authorid' : v.author.id,
+			'lang' : v.author.alang.name
+		})
 
 	return HttpResponse(json.dumps(results), content_type="application/json")
 
@@ -279,12 +271,16 @@ def getVerse(request):
 	except:
 		raise
 
-	f1 = Q(chapter=chapterNum) & Q(number=verseNum) & Q(author__name=authorName)
-
-	verses = Verse.objects.filter(f1)
+	verses = Verse.objects.filter(Q(chapter=chapterNum) & Q(number=verseNum) & Q(author__name=authorName))
 
 	results = []
 	for v in verses:
-		results.append({ 'verseNum' : v.number, 'vtext' : unicodedata.normalize('NFC', v.vtext), 'author' : v.author.name, 'authorid' : v.author.id, 'lang' : v.author.alang.name })
+		results.append({
+			'verseNum' : v.number,
+			'vtext' : unicodedata.normalize('NFC', v.vtext),
+			'author' : v.author.name,
+			'authorid' : v.author.id,
+			'lang' : v.author.alang.name
+		})
 
 	return HttpResponse(json.dumps(results), content_type="application/json")
