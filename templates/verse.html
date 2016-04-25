@@ -93,7 +93,14 @@
 	{% for m in verse %}
 		<div class="commentBox">
 			<p>
-				<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}] {{m.vtext}}
+				<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
+				<div style="direction: rtl; unicode-bidi: embed;">
+					<span style="font-family: sans-serif;font-size:145%;line-height:150%">
+						<span lang="ar" xml:lang="ar">
+							{{m.vtext}}
+						</span>
+					</span>
+				</div>
 			</p>
 			<div id="verseTrans{{m.number}}" class="transV"></div>
 		</div>
