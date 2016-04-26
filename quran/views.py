@@ -1,7 +1,7 @@
 """
  The Holy Quran
  @author        Abdullah Al Zakir Hossain, Email: aazhbd@yahoo.com
- @copyright     Copyright (c)2009-2014 ArticulateLogic Labs
+ @copyright     Copyright (c)2009-2016 ArticulateLogic Labs
 """
 from django.shortcuts import render
 from django.shortcuts import render_to_response
@@ -41,12 +41,21 @@ def viewLogin(request):
 		captcha = request.POST.get('hiddenRecaptcha', None)
 
 		if email and upass:
-			user = User.objects.create_user(email, email, upass)
-			user.first_name = name
-			user.save()
-			context.update({ 'msg_body' : "The registration is successful, enter information to login", })
+			try:
+				existing = User.objects.get(email=email)
+			except:
+				existing = None
+
+			if existing is not None:
+				context.update({ 'msg_body' : "The sign up information were invalid, already exists " + str(email), })
+				return render_to_response("signup.html", context_instance=context)
+			else:
+				user = User.objects.create_user(email, email, upass)
+				user.first_name = name
+				user.save()
+				context.update({ 'msg_body' : "The registration is successful, enter information to login", })
 		else:
-			context.update({ 'msg_body' : "The sign up information were invalid." + str(email) + str(upass), })
+			context.update({ 'msg_body' : "The sign up information were invalid. " + str(email), })
 			return render_to_response("signup.html", context_instance=context)
 
 	return render_to_response("login.html", context_instance=context)
