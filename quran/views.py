@@ -61,7 +61,7 @@ def viewDiscuss(request):
 		username = request.POST.get('email', None)
 		password = request.POST.get('password', None)
 
-		user = authenticate(username=username, password=password)
+		user = authenticate(email=username, password=password)
 		if user is not None:
 			if user.is_active:
 				login(request, user)
