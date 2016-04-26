@@ -58,10 +58,10 @@ def viewDiscuss(request):
 	context.update({ 'comments' : comments, })
 
 	if request.method == "POST":
-		username = request.POST.get('email', None)
-		password = request.POST.get('password', None)
+		uemail = request.POST.get('email', None).strip()
+		password = request.POST.get('password', None).strip()
 
-		user = authenticate(email=username, password=password)
+		user = authenticate(username=uemail, password=password)
 		if user is not None:
 			if user.is_active:
 				login(request, user)
