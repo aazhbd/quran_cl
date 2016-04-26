@@ -61,8 +61,12 @@ def viewDiscuss(request):
 		uemail = request.POST.get('email', None).strip()
 		password = request.POST.get('password', None).strip()
 
-		user = User.objects.get(email=uemail)
-		if user.check_password(password):
+		try:
+			user = User.objects.get(email=uemail)
+		except:
+			user = None
+
+		if user is not None and user.check_password(password):
 			if user.is_active:
 				user.backend = 'django.contrib.auth.backends.ModelBackend'
 				login(request, user)
