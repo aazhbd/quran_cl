@@ -31,14 +31,14 @@
 {% if verseresult %}
 	<p>Total results in verses: {{totalresult}}</p>
 	{% for m in verseresult %}
-
 	<div class="commentBox">
-		<p>
-			Chapter: <a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> <a href="/{{m.chapter.id}}/{{m.number}}"> {{m.chapter.english_name}} - {{m.chapter.arabic_name}} - {{m.chapter.transliteration}}</a> | {{m.vtext}} <a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a>
-			<br /><a href="/{{m.chapter.id}}/{{m.number}}">{{m.author}}</a>
-		</p>
+		Chapter: <a href="/{{m.chapter.id}}/{{m.number}}">{{ m.chapter.id }}:{{ m.number }}</a>
+		<a href="/{{m.chapter.id}}/{{m.number}}"> {{ m.chapter.english_name }} - {{ m.chapter.arabic_name }} - {{ m.chapter.transliteration }}</a>
+		|
+		<span class="verseTxt">{{ m.vtext|safe|escape }}</span>
+		<a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a>
+		<br /><a href="/{{m.chapter.id}}/{{m.number}}">{{ m.author }}</a>
 	</div>
-
 	{% endfor %}
 {% endif %}
 
