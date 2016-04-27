@@ -236,17 +236,44 @@ img {
 
 .homemsg h4 {
     font-weight: lighter;
-    font-size: 1.55em;
+    font-size: 155%;
     color: #336699;
     padding: 10px 2px;
+    display: block;
+    clear:both;
 }
 
-#backlinks {
-    padding: 10px;
+#subpanel {
+    float: none;
+    display: block;
+    clear:both;
+    min-height: 50px;
+    box-shadow: 1px 1px 4px 1px #ddd;
+    opacity: 0.82;
+}
+
+.backlinks {
+    display: inline-block;
+    float: left;
+    margin: 10px;
+}
+
+.navigates {
+    float: right;
+    margin: 10px;
+}
+
+.sharelinks {
+    float: left;
+    margin: 10px;
+    font-size: 100%;
 }
 
 .verseBox {
     padding: 5px 10px;
+    float: none;
+    display: block;
+    clear:both;
 }
 
 .lowered_body {
@@ -254,7 +281,7 @@ img {
 }
 
 .commentBox {
-    box-shadow: 0 0px 4px 0px #ddd;
+    box-shadow: 1px 1px 4px 1px #ddd;
     opacity: 0.82;
     min-height: 50px;
     border-radius: 0.2em;
@@ -262,10 +289,14 @@ img {
     -webkit-border-radius: 0.2em;
     margin: 10px auto;
     padding: 10px 4px;
+    display: block;
+    clear:both;
 }
 
 .commentBox p {
     padding: 10px 4px;
+    display: block;
+    clear:both;
 }
 
 .transV {

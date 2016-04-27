@@ -74,14 +74,15 @@
 		{% endif %}
 	</div>
 
-	<div id="backlinks">
-		<a href="/home">Home </a> > <a href="/{{cnum}}">Chapter {{ cnum }} </a>
-
-		<div style="float:right;">
+	<div id="subpanel">
+		<div class="backlinks">
+			<a href="/home">Home </a> > <a href="/{{cnum}}">Chapter {{ cnum }} </a>
+		</div>
+		{% include "socialshare.html" %}
+		<div class="navigates">
 			{% if cnum > 1 %}
 			<a class="pure-button pure-button-primary" href="/{{cnum|add:-1}}/">Previous Chapter</a>
 			{% endif %}
-			&nbsp;&nbsp;&nbsp;
 			{% if cnum < 114 %}
 			<a class="pure-button pure-button-primary" href="/{{cnum|add:1}}/">Next Chapter</a>
 			{% endif %}
