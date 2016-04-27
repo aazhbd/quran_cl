@@ -58,6 +58,7 @@ def viewLogin(request):
 			context.update({ 'msg_body' : "The sign up information were invalid. " + str(email), })
 			return render_to_response("signup.html", context_instance=context)
 
+	context.update({ 'msg_body' : "Login", })
 	return render_to_response("login.html", context_instance=context)
 
 def viewDiscuss(request):
@@ -97,6 +98,7 @@ def viewLogout(request):
 
 def viewSignup(request):
 	context = RequestContext(request)
+	context.update({ 'msg_body' : "Signup", })
 	return render_to_response("signup.html", context_instance=context)
 
 def viewChapter(request, **Args):
