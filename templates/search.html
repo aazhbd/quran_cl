@@ -14,9 +14,20 @@
 
 {% if searchkey %}
 <div class="title">The result for search key: {{searchkey}}</div>
+<p>A total of {{totalresult}} results found</p>
 {% else %}
-<div class="title">Invalid search key</div>
+<div class="title">No search results found. Please enter a valid search key.</div>
 {% endif %}
+
+<div id="searchmore">
+	{% if pageNum > 1  %}
+	<a class="pure-button pure-button-primary" style="float: left;" href='/search/{{searchkey}}/{{pageNum|add:"-1"}}'>< Previous </a>
+	{% endif %}
+
+	{% if pageNum <= totalpages %}
+	<a class="pure-button pure-button-primary" style="float: right;" href='/search/{{searchkey}}/{{pageNum|add:"+1"}}'> Next ></a>
+	{% endif %}
+</div>
 
 {% if titleresult %}
 	{% for m in titleresult %}
@@ -29,7 +40,6 @@
 {% endif %}
 
 {% if verseresult %}
-	<p>Total results in verses: {{totalresult}}</p>
 	{% for m in verseresult %}
 	<div class="commentBox">
 		Chapter: <a href="/{{m.chapter.id}}/{{m.number}}">{{ m.chapter.id }}:{{ m.number }}</a>

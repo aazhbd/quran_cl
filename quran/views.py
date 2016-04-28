@@ -53,7 +53,7 @@ def viewLogin(request):
 				user = User.objects.create_user(email, email, upass)
 				user.first_name = name
 				user.save()
-				context.update({ 'msg_body' : "The registration is successful, enter information to login", })
+				context.update({ 'msg_body' : "Congratulations, the signup was successful, You can now login to share your expertise or ask questions on any verse to get answers from Scholars and Enthusiasts", })
 		else:
 			context.update({ 'msg_body' : "The sign up information were invalid. " + str(email), })
 			return render_to_response("signup.html", context_instance=context)

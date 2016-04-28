@@ -173,7 +173,7 @@
 		{% for c in comments %}
 		<div class="commentBox">
 			<div class="subtitle">
-				A {{ c.comment_type }} on verse <a href="/{{c.cnum}}/{{c.vnum}}/">{{ c.cnum }}:{{ c.vnum }}</a>
+				{{ c.comment_type }} on verse <a href="/{{c.cnum}}/{{c.vnum}}/">{{ c.cnum }}:{{ c.vnum }}</a>
 			</div>
 			<p>
 				{{ c.ctext }}
