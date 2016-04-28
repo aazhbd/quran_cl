@@ -167,14 +167,14 @@ img {
 
 .btnsearch {
     float: left;
-    height: 32px;
-    width: 32px;
+    height: 30px;
+    width: 37px;
     margin: 0;
 }
 
 #searchico {
     height: 19px;
-    padding: 2px;
+    padding: 1px;
 }
 
 /* banner ends here */
