@@ -86,12 +86,11 @@ img {
     padding: 1px 0;
     width: 100%;
     overflow: auto;
-    z-index: 999;
+    z-index: 10;
 }
 
 #navigatemenu {
     float: left;
-    z-index: 999;
     padding: 10px 0;
 }
 
@@ -109,7 +108,7 @@ img {
     border: 1px solid #0f0;
     padding: 5px;
     margin: 3px;
-    z-index: 9999;
+    z-index: 10;
 }
 
 /* reports ends here */
@@ -338,7 +337,7 @@ img {
     position: fixed;
     top: 64px;
     margin: 0 auto;
-    z-index: 999;
+    z-index: 1;
 }
 
 .choices {
