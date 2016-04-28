@@ -316,9 +316,10 @@ img {
     padding: 10px;
 }
 
-#footer p {
+#footer .content {
     margin: 0 auto;
     text-align: center;
+    padding: 10px;
 }
 
 /* footer ends here*/
