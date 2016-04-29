@@ -144,8 +144,9 @@ def viewVerse(request, **Args):
 		ctext = request.POST.get('comment', "")
 		comment_type = request.POST.get('comment_type', "")
 		cuser = request.user
+		captcha_val = request.POST.get('g-recaptcha-response', "")
 
-		if ctext != "" and comment_type != "":
+		if ctext != "" and comment_type != "" and captcha_val != "":
 			try:
 				c = Comment(user=cuser, vnum=vNum, cnum=cNum, ctext=ctext, comment_type=comment_type)
 				c.save()
