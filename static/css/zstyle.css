@@ -351,6 +351,7 @@ img {
 @media (max-width: 360px) {
     #selectors {
         position: inherit;
+        top: 0px;
     }
 }
 
