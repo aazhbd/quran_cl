@@ -89,24 +89,6 @@ img {
     z-index: 10;
 }
 
-@media (max-width: 360px) {
-    #contentheader {
-        position: relative;
-    }
-    #contentbody {
-        margin: 0;
-    }
-    #selectors {
-        position: inherit;
-        top: 0px;
-        float: left;
-        clear: both;
-    }
-    .lowered_body {
-        margin-top: 0px;
-    }
-}
-
 #navigatemenu {
     float: left;
     padding: 10px 0;
@@ -428,4 +410,20 @@ img {
     margin: 0;
 }
 
-
+@media (max-width: 360px) {
+    #contentheader {
+        position: relative;
+    }
+    #contentbody {
+        margin: 0;
+    }
+    #selectors {
+        position: inherit;
+        top: 0px;
+        float: left;
+        clear: both;
+    }
+    .lowered_body {
+        margin-top: 0px;
+    }
+}
