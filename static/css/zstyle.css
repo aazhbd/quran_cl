@@ -93,6 +93,18 @@ img {
     #contentheader {
         position: relative;
     }
+    #contentbody {
+        margin-top: 0px  auto;
+    }
+    #selectors {
+        position: relative;
+        top: 0px;
+        float: left;
+        clear: both;
+    }
+    .lowered_body {
+        margin-top: 0px;
+    }
 }
 
 #navigatemenu {
@@ -348,21 +360,6 @@ img {
     top: 64px;
     margin: 0 auto;
     z-index: 1;
-}
-
-@media (max-width: 360px) {
-    #selectors {
-        position: relative;
-        top: 0px;
-        float: left;
-        clear: both;
-    }
-    .lowered_body {
-        margin-top: 0px;
-    }
-    #contentbody {
-        margin-top: 0px  auto;
-    }
 }
 
 .choices {
