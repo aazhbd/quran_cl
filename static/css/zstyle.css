@@ -284,7 +284,8 @@ img {
 
 .lowered_body {
     margin-top: 110px;
-    float: none;
+    float: left;
+    clear: left;
 }
 
 .commentBox {
@@ -350,6 +351,9 @@ img {
 @media (max-width: 360px) {
     #selectors {
         position: inherit;
+        top: 0px;
+        float: left;
+        clear: left;
     }
 }
 
