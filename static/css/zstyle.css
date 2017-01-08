@@ -97,10 +97,13 @@ img {
         margin: 0px auto;
     }
     #selectors {
-        position: relative;
+        position: inherit;
         top: 0px;
         float: left;
         clear: both;
+    }
+    .lowered_body {
+        margin-top: 0px;
     }
 }
 
