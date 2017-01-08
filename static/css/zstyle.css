@@ -360,6 +360,9 @@ img {
     .lowered_body {
         margin-top: 0px;
     }
+    #contentbody {
+        margin-top: 0px  auto;
+    }
 }
 
 .choices {
