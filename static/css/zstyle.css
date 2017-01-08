@@ -93,6 +93,10 @@ img {
     #contentheader {
         position: relative;
     }
+
+    #selectors {
+        position: relative;
+    }
 }
 
 #navigatemenu {
@@ -218,7 +222,7 @@ img {
 
 /* subtitle starts here */
 
-.subtitle{
+.subtitle {
     color: #101010;
     font-style: normal;
     font-weight: lighter;
@@ -230,7 +234,7 @@ img {
 
 /* body starts here */
 
-.body{
+.body {
     color: #000;
     text-align: justify;
     position: relative;
