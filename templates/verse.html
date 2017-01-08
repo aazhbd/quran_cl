@@ -2,8 +2,8 @@
 {% load static %}{% load i18n %}
 {% block title %}Quran {{cnum}}:{{vnum}} | {{ msg_body }}{% endblock %}
 
-{% block description %}{% spaceless %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {% for c in comments %} {{c.ctext.strip|safe}}, {% endfor %} {% endspaceless %}{% endblock %}
-{% block keywords %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}} {% endblock %}
+{% block description %}{% spaceless %} Quran, Chapter {{cnum}}, Verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {{ msg_body }}, {% for c in comments %} {{c.ctext.strip|safe}}, {% endfor %} {% endspaceless %}{% endblock %}
+{% block keywords %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {{ msg_body }}{% endblock %}
 
 {% block scripttags %}
 <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
