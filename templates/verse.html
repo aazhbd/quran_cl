@@ -2,7 +2,7 @@
 {% load static %}{% load i18n %}
 {% block title %}Quran {{cnum}}:{{vnum}} | {{ msg_body }}{% endblock %}
 
-{% block description %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {% for c in comments %} {{c.ctext}}, {% endfor %} {% endblock %}
+{% block description %}{% spaceless %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {% for c in comments %} {{c.ctext}}, {% endfor %} {% endspaceless %}{% endblock %}
 {% block keywords %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}} {% endblock %}
 
 {% block scripttags %}
