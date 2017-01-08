@@ -93,10 +93,6 @@ img {
     #contentheader {
         position: relative;
     }
-
-    #selectors {
-        position: relative;
-    }
 }
 
 #navigatemenu {
@@ -348,6 +344,12 @@ img {
     top: 64px;
     margin: 0 auto;
     z-index: 1;
+}
+
+@media (max-width: 360px) {
+    #selectors {
+        position: inherit;
+    }
 }
 
 .choices {
