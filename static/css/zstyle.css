@@ -94,7 +94,7 @@ img {
         position: relative;
     }
     #contentbody {
-        margin: 0px auto;
+        margin: 0;
     }
     #selectors {
         position: inherit;
