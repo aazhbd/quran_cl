@@ -89,6 +89,12 @@ img {
     z-index: 10;
 }
 
+@media (max-width: 360px) {
+    #contentheader {
+        position: relative;
+    }
+}
+
 #navigatemenu {
     float: left;
     padding: 10px 0;
