@@ -161,7 +161,7 @@ def viewVerse(request, **Args):
 
 	try:
 		chName = Chapter.objects.get(pk=cNum)
-		context.update({'msg_body': "Verse "  + vNum + " of the chapter " + cNum + " : " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
+		context.update({'msg_body': "Verse "  + vNum + " of Chapter " + cNum + " : " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
 	except:
 		context.update({'msg_body': "Chapter " + cNum + " Verse " + vNum, })
 
