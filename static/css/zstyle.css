@@ -352,6 +352,8 @@ img {
     #selectors {
         position: inherit;
         top: 0px;
+        float: left;
+        clear: left;
     }
 }
 
