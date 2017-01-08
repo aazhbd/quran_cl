@@ -234,6 +234,8 @@ img {
     color: #000;
     text-align: justify;
     position: relative;
+    float: none;
+    clear: both;
     overflow: auto;
     font-size: 1em;
     padding: 10px 0;
