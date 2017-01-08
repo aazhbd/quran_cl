@@ -355,6 +355,9 @@ img {
         float: left;
         clear: both;
     }
+    .lowered_body {
+        margin-top: 0px;
+    }
 }
 
 .choices {
