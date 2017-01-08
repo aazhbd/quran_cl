@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}{% load i18n %}
-{% block title %} Details of Chapter {{cnum}} {% endblock %}
+{% block title %}{{ msg_body }}{% endblock %}
 
-{% block description %} Quran, chapter {{cnum}}, {% endblock %}
-{% block keywords %} Quran, chapter {{cnum}}, {% endblock %}
+{% block description %} Quran, {{ msg_body }}, {% endblock %}
+{% block keywords %} Quran, {{ msg_body }}, {% endblock %}
 
 {% block scripttags %}
 <script type="text/javascript">
@@ -19,7 +19,7 @@
 
 			var data = {
 				authorName : clickData,
-				chapterNum : {{cnum}},
+				chapterNum : {{ cnum }},
 				'csrfmiddlewaretoken' : '{{ csrf_token }}'
 			};
 
