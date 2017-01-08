@@ -350,7 +350,7 @@ img {
 
 @media (max-width: 360px) {
     #selectors {
-        position: inherit;
+        position: relative;
         top: 0px;
         float: left;
         clear: both;
