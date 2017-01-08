@@ -285,7 +285,7 @@ img {
 .lowered_body {
     margin-top: 110px;
     float: left;
-    clear: left;
+    clear: both;
 }
 
 .commentBox {
@@ -353,7 +353,10 @@ img {
         position: inherit;
         top: 0px;
         float: left;
-        clear: left;
+        clear: both;
+    }
+    .lowered_body {
+        margin-top: 0px;
     }
 }
 
