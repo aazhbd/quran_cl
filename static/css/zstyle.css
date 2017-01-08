@@ -284,7 +284,8 @@ img {
 
 .lowered_body {
     margin-top: 110px;
-    float: none;
+    float: left;
+    clear: left;
 }
 
 .commentBox {
