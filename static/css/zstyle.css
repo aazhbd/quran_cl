@@ -350,12 +350,13 @@ img {
 
 @media (max-width: 360px) {
     #selectors {
-        position: absolute;
+        position: inherit;
         top: 0px;
         float: left;
         clear: both;
     }
     .lowered_body {
+        position: absolute;
         margin-top: 0px;
     }
 }
