@@ -184,7 +184,11 @@ img {
 
 #topright {
     float: right;
-    padding: 10px 0;
+    padding: 4px 0;
+}
+
+#login_info {
+    float: left;
 }
 
 /* contentbody starts here */
@@ -426,7 +430,7 @@ img {
         top: 0px;
         float: left;
         clear: both;
-        max-height: 110px;
+        max-height: 200px;
     }
     .lowered_body {
         margin-top: 0px;
