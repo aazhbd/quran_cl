@@ -89,14 +89,12 @@
 
 	{% if cnum != "9" and cnum != "1" %}
 	<div class="verseBox">
-		<span class="verseTxt">بسم الله الرحمن الرحيم</span> &nbsp;&nbsp;&nbsp; <span class="verseTxt">bismi-llāhi r-raḥmāni r-raḥīm</span>
+		<span dir='rtl' lang='ar' class="verseTxt">بسم الله الرحمن الرحيم</span> &nbsp;&nbsp;&nbsp; <span class="verseTxt">bismi-llāhi r-raḥmāni r-raḥīm</span>
 	</div>
 	<div class="verseBox">
 		<span class="verseTxt">In the name of God, the Most Gracious, the Most Merciful.</span>
 	</div>
 	{% endif %}
-
-
 	{% for m in full_chap %}
 	<div class="commentBox">
 		<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
