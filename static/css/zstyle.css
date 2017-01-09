@@ -282,7 +282,7 @@ img {
 }
 
 .lowered_body {
-    margin-top: 110px;
+    margin-top: 200px;
     width: 100%;
     float: left;
     clear: both;
@@ -337,13 +337,13 @@ img {
 #selectors {
     background: #fff;
     float: left;
-    width: 91%;
-    max-height: 145px;
+    width: 80%;
+    max-height: 220px;
     min-height: 100px;
     overflow-x: auto;
     overflow-y: scroll;
     position: fixed;
-    top: 64px;
+    top: 74px;
     margin: 0 auto;
     z-index: 1;
 }
@@ -426,6 +426,7 @@ img {
         top: 0px;
         float: left;
         clear: both;
+        max-height: 110px;
     }
     .lowered_body {
         margin-top: 0px;
