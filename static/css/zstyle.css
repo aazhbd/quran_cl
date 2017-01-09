@@ -146,16 +146,17 @@ img {
     padding: 0;
 }
 
-#search {
+#search_wrap {
     float: left;
     width: 37%;
     padding: 10px 0;
 }
 
-.search {
+.search_input {
+    background: url('/static/images/search-white.png') no-repeat 10px 6px;
 	float: left;
-	padding: 4px 0;
-	width: 73%;
+	padding: 6px 15px 6px 35px !important;
+	width: 100%;
 }
 
 #frmsearch {
