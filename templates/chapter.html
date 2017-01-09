@@ -35,7 +35,7 @@
 					{
 						var tmp = $('#verseTrans' + result[i].verseNum).html();
 
-						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span class="verseTxt">' + result[i].vtext + '</span></div>';
+						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span lang="' + result[i].iso_lang + '" xml:lang="' + result[i].iso_lang + '" class="verseTxt">' + result[i].vtext + '</span></div>';
 
 						$('#verseTrans' + result[i].verseNum).html(tmp + str);
 					}

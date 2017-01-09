@@ -275,7 +275,8 @@ def getChapter(request):
 			'vtext' : unicodedata.normalize('NFC', v.vtext),
 			'author' : v.author.name,
 			'authorid' : v.author.id,
-			'lang' : v.author.alang.name
+			'lang' : v.author.alang.name,
+			'iso_lang' : v.author.alang.iso_code
 		})
 
 	return HttpResponse(json.dumps(results), content_type="application/json")
@@ -297,7 +298,8 @@ def getVerse(request):
 			'vtext' : unicodedata.normalize('NFC', v.vtext),
 			'author' : v.author.name,
 			'authorid' : v.author.id,
-			'lang' : v.author.alang.name
+			'lang' : v.author.alang.name,
+			'iso_lang' : v.author.alang.iso_code
 		})
 
 	return HttpResponse(json.dumps(results), content_type="application/json")
