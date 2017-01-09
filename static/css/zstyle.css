@@ -343,7 +343,7 @@ img {
     overflow-x: auto;
     overflow-y: scroll;
     position: fixed;
-    top: 74px;
+    top: 64px;
     margin: 0 auto;
     z-index: 1;
 }
