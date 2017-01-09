@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /quran/
+Disallow: /quran_cl/
+Disallow: /static/
+Disallow: /templates/
