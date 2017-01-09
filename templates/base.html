@@ -43,10 +43,10 @@
 					</ul>
 				</div>
 			</div>
-			<div id="search" class="pure-form">
+			<div id="search_wrap" class="pure-form">
 				<form class="frmsearch" method="post" id="frmsearch" action="/search/">
 					{% csrf_token %}
-					<input type="text" class="search"  placeholder="Search keywords in Quran" value="{{searchkey}}" name="search" />
+					<input type="text" class="search_input"  placeholder="Search keywords in Quran" value="{{searchkey}}" name="search" />
 				</form>
 			</div>
 			{% endblock %}

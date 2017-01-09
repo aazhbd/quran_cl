@@ -146,16 +146,16 @@ img {
     padding: 0;
 }
 
-#search {
+#search_wrap {
     float: left;
     width: 37%;
     padding: 10px 0;
 }
 
-.search {
+.search_input {
 	float: left;
 	padding: 4px 0;
-	width: 73%;
+	width: 100%;
 }
 
 #frmsearch {
