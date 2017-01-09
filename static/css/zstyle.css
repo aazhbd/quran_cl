@@ -142,19 +142,18 @@ img {
 /* banner starts here */
 
 #banner {
-    /*width: 91%;*/
     margin: auto 4%;
     padding: 0;
 }
 
 #search_wrap {
     float: left;
-    width: 37%;
+    width: 30%;
     padding: 10px 0;
 }
 
 .search_input {
-    background: url('/static/images/search-white.png') no-repeat 10px 6px;
+    background: url('/static/images/search-white.png') no-repeat 10px 10px;
 	float: left;
 	padding: 6px 15px 6px 35px !important;
 	width: 100%;
