@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}{% load i18n %}
-{% block title %}Quran {{cnum}}:{{vnum}} | {{ msg_body }}{% endblock %}
+{% block title %} Verse {{cnum}}:{{vnum}} Details {% endblock %}
 
-{% block description %}{% spaceless %} Quran, Chapter {{cnum}}, Verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {{ msg_body }}, {% for c in comments %} {{c.ctext.strip|safe}}, {% endfor %} {% endspaceless %}{% endblock %}
-{% block keywords %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {{ msg_body }}{% endblock %}
+{% block description %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {% for c in comments %} {{c.ctext}}, {% endfor %} {% endblock %}
+{% block keywords %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}} {% endblock %}
 
 {% block scripttags %}
 <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
@@ -35,7 +35,7 @@
 					for(i = 0; i < result.length; i++)
 					{
 						var tmp = $('#verseTrans' + result[i].verseNum).html();
-						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span lang="' + result[i].iso_lang + '" xml:lang="' + result[i].iso_lang + '" class="verseTxt">' + result[i].vtext + '</span></div>';
+						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span class="verseTxt">' + result[i].vtext + '</span></div>';
 						$('#verseTrans' + result[i].verseNum).html(tmp + str);
 					}
 				},
@@ -68,7 +68,7 @@
 <div class="lowered_body">
 	<div class="homemsg">
 		{% if msg_body %}
-			<h4>{{ msg_body }}</h4>
+			<h4>{{msg_body}}</h4>
 		{% endif %}
 	</div>
 
@@ -91,80 +91,82 @@
 		<div class="commentBox">
 			<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
 			<div style="direction: rtl; unicode-bidi: embed;">
-				<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
+				<span style="font-family: sans-serif;font-size:145%;line-height:150%">
+					<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
+				</span>
 			</div>
 			<div id="verseTrans{{m.number}}" class="transV"></div>
 		</div>
-		{% if request.user.is_authenticated %}
-		<form action="/{{m.chapter.id}}/{{m.number}}/" method="post" class="pure-form pure-form-aligned" id="commentForm">
-			{% csrf_token %}
-			<fieldset>
-				<legend>Post your comment about this verse</legend>
-				<div class="pure-control-group">
-					<label for="id_comment_type">Comment type:</label>
-					<select id="id_comment_type" name="comment_type" class="pure-input-1-2">
-						<option selected>Translation</option>
-						<option>Explanation</option>
-						<option>Question</option>
-						<option>Comment</option>
-					</select>
-				</div>
-				<div class="pure-control-group">
-					<label for="comment">Comment: </label>
-					<textarea placeholder="Enter your comment" class="pure-input-1-2" name="comment" id="comment"></textarea>
-				</div>
-				<div class="pure-control-group">
-					<label for="hiddenRecaptcha" style="float: left;">Captcha:</label>
-					<div class="g-recaptcha" data-sitekey="6Ldf0xITAAAAAO1PqrVe3ICOGgRoomqhcV-3-zo1" style="float: left; margin: 5px;"></div>
-					<input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
-				</div>
-				<div class="pure-controls">
-					<label for="id_submit" class="pure-checkbox"></label>
-					<button type="submit" id="id_submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Submit Comment</button>
-				</div>
-			</fieldset>
-		</form>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#commentForm").validate({
-					ignore: ".ignore",
-					groups: {
-						agree: "agree"
-					},
-					errorPlacement: function(error, element) {
-						if (element.attr("name") == "agree") {
-							error.insertAfter("#agree-label");
-						} else {
-							error.insertAfter(element);
-						}
-					},
-					rules:{
-						comment_type:{ required: true },
-						comment:{ required: true, maxLength: 2000 },
-						"hiddenRecaptcha": {
-							required: function() {
-								return (grecaptcha.getResponse() == '');
-							}
-						}
-					},
-					messages:{
-						comment_type: {
-							required: "Comment type missing"
-						},
-						comment: {
-							required: "Comment content missing"
-						},
-						"hiddenRecaptcha": "The captcha is not validated."
-					}
-				});
-			});
-		</script>
-		{% else %}
-		<div class="pure-form pure-form-aligned">
-			<a class="pure-button pure-button-primary" href="/login">Login</a> to post comments or <a class="pure-button pure-button-primary" href="/signup">Signup</a>
-		</div>
-		{% endif %}
 	{% endfor %}
+	{% if request.user.is_authenticated %}
+	<form action="/{{m.chapter.id}}/{{m.number}}/" method="post" class="pure-form pure-form-aligned" id="commentForm">
+		{% csrf_token %}
+		<fieldset>
+			<legend>Post your comment about this verse</legend>
+			<div class="pure-control-group">
+				<label for="id_comment_type">Comment type:</label>
+				<select id="id_comment_type" name="comment_type" class="pure-input-1-2">
+					<option selected>Translation</option>
+					<option>Explanation</option>
+					<option>Question</option>
+					<option>Comment</option>
+				</select>
+			</div>
+			<div class="pure-control-group">
+				<label for="comment">Comment: </label>
+				<textarea placeholder="Enter your comment" class="pure-input-1-2" name="comment" id="comment"></textarea>
+			</div>
+			<div class="pure-control-group">
+				<label for="hiddenRecaptcha" style="float: left;">Captcha:</label>
+				<div class="g-recaptcha" data-sitekey="6LfsqBATAAAAAPt_BXPWzWmlP0f22ydpdL_7iOsb" style="float: left; margin: 5px; "></div>
+				<input id="hiddenRecaptcha" type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha">
+			</div>
+			<div class="pure-controls">
+				<label for="id_submit" class="pure-checkbox"></label>
+				<button type="submit" id="id_submit" class="pure-button pure-button-primary" name="submit" style="display: block; clear: both; margin-top: 5px; ">Submit Comment</button>
+			</div>
+		</fieldset>
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#commentForm").validate({
+				ignore: ".ignore",
+				groups: {
+					agree: "agree"
+				},
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "agree") {
+						error.insertAfter("#agree-label");
+					} else {
+						error.insertAfter(element);
+					}
+				},
+				rules:{
+					comment_type:{ required: true },
+					comment:{ required: true, maxLength: 2000 },
+					"hiddenRecaptcha": {
+						required: function() {
+							return (grecaptcha.getResponse() == '');
+						}
+					}
+				},
+				messages:{
+					comment_type: {
+						required: "Comment type missing"
+					},
+					comment: {
+						required: "Comment content missing"
+					},
+					"hiddenRecaptcha": "The captcha is not validated."
+				}
+			});
+		});
+	</script>
+	{% else %}
+	<div class="pure-form pure-form-aligned">
+		<a class="pure-button pure-button-primary" href="/login">Login</a> to post comments or <a class="pure-button pure-button-primary" href="/signup">Signup</a>
+	</div>
+	{% endif %}
 
 	{% if comments %}
 	<h4>Discussions: </h4>
