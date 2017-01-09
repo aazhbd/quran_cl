@@ -268,11 +268,18 @@ def getChapter(request):
 
 	verses = Verse.objects.filter(Q(chapter=chapterNum) & Q(author__name=authorName))
 
+	try:
+		from HTMLParser import HTMLParser
+	except ImportError:
+		from html.parser import HTMLParser
+	
+	h = HTMLParser()
+
 	results = []
 	for v in verses:
 		results.append({
 			'verseNum' : v.number,
-			'vtext' : unicodedata.normalize('NFC', v.vtext),
+			'vtext' : unicodedata.normalize('NFC', h.unescape(v.vtext)),
 			'author' : v.author.name,
 			'authorid' : v.author.id,
 			'lang' : v.author.alang.name,
@@ -288,6 +295,13 @@ def getVerse(request):
 		verseNum = request.POST.get('verseNum', False)
 	except:
 		raise
+	
+	try:
+		from HTMLParser import HTMLParser
+	except ImportError:
+		from html.parser import HTMLParser
+	
+	h = HTMLParser()
 
 	verses = Verse.objects.filter(Q(chapter=chapterNum) & Q(number=verseNum) & Q(author__name=authorName))
 
@@ -295,7 +309,7 @@ def getVerse(request):
 	for v in verses:
 		results.append({
 			'verseNum' : v.number,
-			'vtext' : unicodedata.normalize('NFC', v.vtext),
+			'vtext' : unicodedata.normalize('NFC', h.unescape(v.vtext)),
 			'author' : v.author.name,
 			'authorid' : v.author.id,
 			'lang' : v.author.alang.name,
