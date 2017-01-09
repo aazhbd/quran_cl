@@ -23,6 +23,11 @@ urlpatterns = [
     url(r'^search/(?P<search>.+?)/(?P<page>\d+)/?$', views.viewSearch, name='search'),
     url(r'^search/(?P<search>.+?)/?$', views.viewSearch, name='search'),
     url(r'^search/?$', views.viewSearch, name='search'),
-
+    
+    url(r'^robots\.txt$', 'django.shortcuts.render', kwargs={
+        'template_name': 'robots.txt',
+        'content_type': 'text/plain',
+    }),
+    
     url(r'^admin/', admin.site.urls),
 ]
