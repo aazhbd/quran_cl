@@ -153,8 +153,9 @@ img {
 }
 
 .search_input {
+    background: url('/static/images/search-white.png') no-repeat 10px 6px;
 	float: left;
-	padding: 4px 0;
+	padding: 6px 15px 6px 35px !important;
 	width: 100%;
 }
 
