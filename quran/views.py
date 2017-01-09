@@ -171,6 +171,13 @@ def viewVerse(request, **Args):
 		v.vtext = unicodedata.normalize('NFC', v.vtext)
 
 	context.update({ 'verse' : verse, })
+	
+	english_verses = Verse.objects.filter(Q(chapter=cNum) & Q(number=vNum) & Q(author__name='Shakir'))
+	
+	for v in english_verses:
+		v.vtext = unicodedata.normalize('NFC', v.vtext)
+	
+	context.update({ 'english_verses' : english_verses, })
 
 	auths = Verse.objects.filter(chapter=cNum).values('author').distinct()
 

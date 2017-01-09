@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}{% load i18n %}
-{% block title %} Verse {{cnum}}:{{vnum}} Details {% endblock %}
+{% block title %}Quran {{cnum}}:{{vnum}} | {{ msg_body }}{% endblock %}
 
-{% block description %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}}, {% for c in comments %} {{c.ctext}}, {% endfor %} {% endblock %}
-{% block keywords %} Quran, chapter {{cnum}}, verse {{vnum}}, Quran {{cnum}}:{{vnum}} {% endblock %}
+{% block description %}{% spaceless %}Quran {{cnum}}:{{vnum}}, {{ msg_body }}, {% for m in english_verses %}{{m.vtext}}{% endfor %}, {% for c in comments %} {{c.ctext.strip|safe}}, {% endfor %} {% endspaceless %}{% endblock %}
+{% block keywords %}Quran {{cnum}}:{{vnum}}, {{ msg_body }}{% endblock %}
 
 {% block scripttags %}
 <script type="text/javascript" src='https://www.google.com/recaptcha/api.js'></script>
@@ -35,7 +35,7 @@
 					for(i = 0; i < result.length; i++)
 					{
 						var tmp = $('#verseTrans' + result[i].verseNum).html();
-						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span class="verseTxt">' + result[i].vtext + '</span></div>';
+						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span lang="' + result[i].iso_lang + '" xml:lang="' + result[i].iso_lang + '" class="verseTxt">' + result[i].vtext + '</span></div>';
 						$('#verseTrans' + result[i].verseNum).html(tmp + str);
 					}
 				},
@@ -68,7 +68,7 @@
 <div class="lowered_body">
 	<div class="homemsg">
 		{% if msg_body %}
-			<h4>{{msg_body}}</h4>
+			<h4>{{ msg_body }}</h4>
 		{% endif %}
 	</div>
 
@@ -87,17 +87,19 @@
 		</div>
 	</div>
 
+	<div class="commentBox">
 	{% for m in verse %}
-		<div class="commentBox">
-			<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
-			<div style="direction: rtl; unicode-bidi: embed;">
-				<span style="font-family: sans-serif;font-size:145%;line-height:150%">
-					<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
-				</span>
-			</div>
-			<div id="verseTrans{{m.number}}" class="transV"></div>
+		<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
+		<div style="direction: rtl; unicode-bidi: embed;">
+			<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
 		</div>
+		<div id="verseTrans{{m.number}}" class="transV"></div>
 	{% endfor %}
+	{% for m in english_verses %}
+		[{{m.author.alang}}-{{m.author}}] <span>{{m.vtext}}</span>
+	{% endfor %}
+	</div>
+
 	{% if request.user.is_authenticated %}
 	<form action="/{{m.chapter.id}}/{{m.number}}/" method="post" class="pure-form pure-form-aligned" id="commentForm">
 		{% csrf_token %}
