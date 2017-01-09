@@ -288,7 +288,7 @@ img {
 }
 
 .commentBox {
-    box-shadow: 1px 0px 4px 1px #ddd;
+    box-shadow: inset 0px 11px 8px -10px #ddd, inset 0px -11px 8px -10px #ddd;
     opacity: 0.82;
     min-height: 50px;
     border-radius: 0.2em;
