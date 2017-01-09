@@ -110,7 +110,7 @@ def viewChapter(request, **Args):
 
 	try:
 		chName = Chapter.objects.get(pk=cNum)
-		context.update({ 'msg_body' : "Verses of the chapter " + chapterNum + ": " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
+		context.update({ 'msg_body' : "Chapter " + chapterNum + ": " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
 	except:
 		context.update({ 'msg_body' : "Invalid chapter number", })
 
@@ -161,7 +161,7 @@ def viewVerse(request, **Args):
 
 	try:
 		chName = Chapter.objects.get(pk=cNum)
-		context.update({'msg_body': "Verse "  + vNum + " of the chapter " + cNum + " : " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
+		context.update({'msg_body': "Verse "  + vNum + " of Chapter " + cNum + " : " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
 	except:
 		context.update({'msg_body': "Chapter " + cNum + " Verse " + vNum, })
 
@@ -268,14 +268,22 @@ def getChapter(request):
 
 	verses = Verse.objects.filter(Q(chapter=chapterNum) & Q(author__name=authorName))
 
+	try:
+		from HTMLParser import HTMLParser
+	except ImportError:
+		from html.parser import HTMLParser
+	
+	h = HTMLParser()
+
 	results = []
 	for v in verses:
 		results.append({
 			'verseNum' : v.number,
-			'vtext' : unicodedata.normalize('NFC', v.vtext),
+			'vtext' : unicodedata.normalize('NFC', h.unescape(v.vtext)),
 			'author' : v.author.name,
 			'authorid' : v.author.id,
-			'lang' : v.author.alang.name
+			'lang' : v.author.alang.name,
+			'iso_lang' : v.author.alang.iso_code
 		})
 
 	return HttpResponse(json.dumps(results), content_type="application/json")
@@ -287,6 +295,13 @@ def getVerse(request):
 		verseNum = request.POST.get('verseNum', False)
 	except:
 		raise
+	
+	try:
+		from HTMLParser import HTMLParser
+	except ImportError:
+		from html.parser import HTMLParser
+	
+	h = HTMLParser()
 
 	verses = Verse.objects.filter(Q(chapter=chapterNum) & Q(number=verseNum) & Q(author__name=authorName))
 
@@ -294,10 +309,11 @@ def getVerse(request):
 	for v in verses:
 		results.append({
 			'verseNum' : v.number,
-			'vtext' : unicodedata.normalize('NFC', v.vtext),
+			'vtext' : unicodedata.normalize('NFC', h.unescape(v.vtext)),
 			'author' : v.author.name,
 			'authorid' : v.author.id,
-			'lang' : v.author.alang.name
+			'lang' : v.author.alang.name,
+			'iso_lang' : v.author.alang.iso_code
 		})
 
 	return HttpResponse(json.dumps(results), content_type="application/json")

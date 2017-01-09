@@ -9,6 +9,9 @@
 *  
 */
 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+
 * {
     margin:0;
     padding:0;
@@ -16,7 +19,7 @@
 
 body {
     width: 100%;
-    font: 0.82em Verdana, Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif, Verdana;
     color: #000;
     margin: 0 auto;
     position: absolute;
@@ -27,7 +30,7 @@ div {
 }
 
 h1 {
-    font-size: 1.8em;
+    font-size: 2em;
     color: #333;
 }
 
@@ -37,12 +40,12 @@ h1 a {
 }
 
 h2, h2 a{
-    font-size:1.2em;
+    font-size:1.3em;
     font-weight: normal;
 }
 
 h3, h3 a{
-    font-size:1em;
+    font-size:1.1em;
 }
 
 ul{
@@ -51,8 +54,7 @@ ul{
 
 p {
     text-align: justify;
-    font-size: .9em;
-    margin-bottom: .3em;
+    margin-bottom: .4em;
     padding: 1em 0;
 }
 
@@ -63,7 +65,6 @@ p a{
 a {
     text-decoration: none;
     color: #1D62B3;
-    font-size: 1em;
 }
 
 a:hover {
@@ -141,24 +142,25 @@ img {
 /* banner starts here */
 
 #banner {
-    /*width: 91%;*/
     margin: auto 4%;
     padding: 0;
 }
 
-#search {
+#search_wrap {
     float: left;
-    width: 37%;
+    width: 30%;
     padding: 10px 0;
 }
 
-.search {
+.search_input {
+    background: url('/static/images/search-white.png') no-repeat 10px 10px;
 	float: left;
-	padding: 4px 0;
-	width: 73%;
+	padding: 6px 15px 6px 35px !important;
+	width: 100%;
 }
 
 #frmsearch {
+    display: block;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -181,7 +183,11 @@ img {
 
 #topright {
     float: right;
-    padding: 10px 0;
+    padding: 4px 0;
+}
+
+#login_info {
+    float: left;
 }
 
 /* contentbody starts here */
@@ -189,7 +195,7 @@ img {
 #contentbody {
     margin: 100px auto 0;
     background: #fff no-repeat;
-	padding: 0 4%;
+	padding: 0 10%;
     overflow: auto;
     min-height: 480px;
 	border-radius: 0.4em;
@@ -212,7 +218,7 @@ img {
 
 /* subtitle starts here */
 
-.subtitle{
+.subtitle {
     color: #101010;
     font-style: normal;
     font-weight: lighter;
@@ -224,10 +230,12 @@ img {
 
 /* body starts here */
 
-.body{
+.body {
     color: #000;
     text-align: justify;
     position: relative;
+    float: none;
+    clear: both;
     overflow: auto;
     font-size: 1em;
     padding: 10px 0;
@@ -277,11 +285,15 @@ img {
 }
 
 .lowered_body {
-    margin-top: 110px;
+    margin-top: 200px;
+    width: 100%;
+    float: left;
+    clear: both;
 }
 
 .commentBox {
-    box-shadow: 1px 1px 4px 1px #ddd;
+    box-shadow: inset 0px 11px 8px -10px #ddd, inset 0px -11px 8px -10px #ddd;
+    font-size: 1.3em;
     opacity: 0.82;
     min-height: 50px;
     border-radius: 0.2em;
@@ -329,8 +341,8 @@ img {
 #selectors {
     background: #fff;
     float: left;
-    width: 91%;
-    max-height: 145px;
+    width: 80%;
+    max-height: 220px;
     min-height: 100px;
     overflow-x: auto;
     overflow-y: scroll;
@@ -406,4 +418,21 @@ img {
     margin: 0;
 }
 
-
+@media (max-width: 360px) {
+    #contentheader {
+        position: relative;
+    }
+    #contentbody {
+        margin: 0;
+    }
+    #selectors {
+        position: inherit;
+        top: 0px;
+        float: left;
+        clear: both;
+        max-height: 200px;
+    }
+    .lowered_body {
+        margin-top: 0px;
+    }
+}

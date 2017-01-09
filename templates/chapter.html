@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}{% load i18n %}
-{% block title %} Details of Chapter {{cnum}} {% endblock %}
+{% block title %}{{ msg_body }}{% endblock %}
 
-{% block description %} Quran, chapter {{cnum}}, {% endblock %}
-{% block keywords %} Quran, chapter {{cnum}}, {% endblock %}
+{% block description %} Quran, {{ msg_body }}, {% endblock %}
+{% block keywords %} Quran, {{ msg_body }}, {% endblock %}
 
 {% block scripttags %}
 <script type="text/javascript">
@@ -19,7 +19,7 @@
 
 			var data = {
 				authorName : clickData,
-				chapterNum : {{cnum}},
+				chapterNum : {{ cnum }},
 				'csrfmiddlewaretoken' : '{{ csrf_token }}'
 			};
 
@@ -35,7 +35,7 @@
 					{
 						var tmp = $('#verseTrans' + result[i].verseNum).html();
 
-						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span class="verseTxt">' + result[i].vtext + '</span></div>';
+						var str = '<div class="author-'  + result[i].authorid + '">[' + result[i].lang + '-' + result[i].author + '] &nbsp;<span lang="' + result[i].iso_lang + '" xml:lang="' + result[i].iso_lang + '" class="verseTxt">' + result[i].vtext + '</span></div>';
 
 						$('#verseTrans' + result[i].verseNum).html(tmp + str);
 					}
@@ -69,7 +69,7 @@
 <div class="lowered_body">
 	<div class="homemsg">
 		{% if msg_body %}
-		<h4>{{msg_body}}</h4>
+		<h4>{{ msg_body }}</h4>
 		{% endif %}
 	</div>
 
@@ -89,21 +89,17 @@
 
 	{% if cnum != "9" and cnum != "1" %}
 	<div class="verseBox">
-		<span class="verseTxt">بسم الله الرحمن الرحيم</span> &nbsp;&nbsp;&nbsp; <span class="verseTxt">bismi-llāhi r-raḥmāni r-raḥīm</span>
+		<span dir='rtl' lang='ar' class="verseTxt">بسم الله الرحمن الرحيم</span> &nbsp;&nbsp;&nbsp; <span class="verseTxt">bismi-llāhi r-raḥmāni r-raḥīm</span>
 	</div>
 	<div class="verseBox">
 		<span class="verseTxt">In the name of God, the Most Gracious, the Most Merciful.</span>
 	</div>
 	{% endif %}
-
-
 	{% for m in full_chap %}
 	<div class="commentBox">
 		<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
 		<div style="direction: rtl; unicode-bidi: embed;">
-			<span style="font-family: sans-serif;font-size:125%;line-height:150%">
-				<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
-			</span>
+			<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
 			&nbsp; [ <a href="/{{m.chapter.id}}/{{m.number}}/">Details and Discuss</a> ]
 		</div>
 		<div id="verseTrans{{m.number}}" class="transV"></div>

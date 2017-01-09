@@ -1,16 +1,16 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="author" content="Quran, aazhbd, aazhbd@yahoo.com" />
 	<meta name="Copyright" content="Quran, aazhbd, aazhbd@yahoo.com" />
 	<meta name="description" content="{% block description %}This site takes a humble attempt to provide a set of facilities for comprehensive research on Quran and available materials as well as allow discussions for better understanding.{% endblock %}" />
-	<meta name="keywords" content="Quran, translations,Islam, teachings of quran, surah, surat, languages, meaning, understanding quran {% block keywords %} {% endblock %}" />
+	<meta name="keywords" content="Quran, translations, quran, koran, qur&#x27;an, kareem, قران, القرآن, قران كريم, القران الكريم, surah, yasin, yaseen, kahf, mulk, rahman, muslim, islam, Allah, languages, meaning, understanding quran {% block keywords %} {% endblock %}" />
 	<meta name="robots" content="index, follow, I followed" />
     
-    <title>Quran - {% block title %} Home {% endblock %}</title>
+    <title>{% block title %}Home{% endblock %} | Quran</title>
 	<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}" />
     <link href="{% static 'css/zstyle.css' %}" rel="stylesheet" type="text/css" media="screen" />
 	<link href="{% static 'css/forms.css' %}" rel="stylesheet" type="text/css" media="screen" />
@@ -43,35 +43,30 @@
 					</ul>
 				</div>
 			</div>
-			<div id="search" class="pure-form">
+			<div id="search_wrap" class="pure-form">
 				<form class="frmsearch" method="post" id="frmsearch" action="/search/">
 					{% csrf_token %}
-					<input type="text" class="search"  placeholder="Search keywords in Quran" value="{{searchkey}}" name="search" />
-					<button type="submit" class="btnsearch">
-						<img alt="Quran conveylive search" src="{% static 'images/search.png' %}"  id="searchico" />
-					</button>
+					<input type="text" class="search_input"  placeholder="Search keywords in Quran" value="{{searchkey}}" name="search" />
 				</form>
 			</div>
 			{% endblock %}
 			<div id="topright">
+				<div id="login_info">
 				{% if not user.is_authenticated %}
 					<a class="pure-button pure-button-primary" href="/login">Login</a>
 					<a class="pure-button pure-button-primary" href="/signup">Sign Up</a>
 				{% endif %}
 				{% if user.is_authenticated %}
-					{% if user.first_name != "" or user.last_name != "" %}
-						{{user.first_name}} {{user.last_name}}
-					{% else %}
-						{{user.username}}
-					{% endif %}
+					{% if user.first_name != "" or user.last_name != "" %}{{user.first_name}} {{user.last_name}}{% else %}{{user.username}}{% endif %}
 					<a href="/logout">Logout</a>
 				{% endif %}
-				<div style="float: left">
+				</div>
+				<div style="float: left; padding: 8px;">
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 						<input type="hidden" name="cmd" value="_s-xclick">
 						<input type="hidden" name="hosted_button_id" value="V4QC6BHWMFU3W">
-						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" style="border: 0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="Donate to Quran.ConveyLive.com" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" style="width: 1; height: 1; border: 0">
 					</form>
 				</div>
 			</div>
@@ -115,8 +110,8 @@
 		$('body').append($('<div class="ajax-loading"/>').css({'background-image': 'url({% static "images/loading.gif" %})', position: 'fixed', top: 0, left: 0, height: '100%', width: '100%', 'z-index': 1000, 'background-color': "rgb( 255, 255, 255, .8 )", 'background-position': '50% 50%', 'background-repeat': 'no-repeat'}).hide());
 		$(document).ajaxStart(function() { $('.ajax-loading').show(); }).ajaxStop(function() { $('.ajax-loading').hide(); });
 	</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57207d0347c06301"></script>
 </body>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57207d0347c06301"></script>
 </html>
 <!--
 /**
