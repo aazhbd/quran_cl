@@ -87,15 +87,19 @@
 		</div>
 	</div>
 
+	<div class="commentBox">
 	{% for m in verse %}
-		<div class="commentBox">
-			<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
-			<div style="direction: rtl; unicode-bidi: embed;">
-				<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
-			</div>
-			<div id="verseTrans{{m.number}}" class="transV"></div>
+		<a href="/{{m.chapter.id}}/{{m.number}}">{{m.chapter.id}}:{{m.number}}</a> | [{{m.author.alang}}-{{m.author}}]
+		<div style="direction: rtl; unicode-bidi: embed;">
+			<span lang="ar" xml:lang="ar">{{m.vtext}}</span>
 		</div>
+		<div id="verseTrans{{m.number}}" class="transV"></div>
 	{% endfor %}
+	{% for m in english_verses %}
+		[{{m.author.alang}}-{{m.author}}] <span>{{m.vtext}}</span>
+	{% endfor %}
+	</div>
+
 	{% if request.user.is_authenticated %}
 	<form action="/{{m.chapter.id}}/{{m.number}}/" method="post" class="pure-form pure-form-aligned" id="commentForm">
 		{% csrf_token %}
