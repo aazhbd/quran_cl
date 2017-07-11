@@ -6,3 +6,11 @@
 .idea
 db.sqlite3
 pyenv/
+
+# Mac
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
