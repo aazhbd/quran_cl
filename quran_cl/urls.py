@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^search/(?P<search>.+?)/?$', views.viewSearch, name='search'),
     url(r'^search/?$', views.viewSearch, name='search'),
 
-    url(r'^google37851790136c6f53.html/$', TemplateView.as_view(template_name='google37851790136c6f53.html'), name='google-search-console'),
+    url(r'^google37851790136c6f53.html$', TemplateView.as_view(template_name='google37851790136c6f53.html'), name='google-search-console'),
     
     url(r'^robots\.txt$', 'django.shortcuts.render', kwargs={
         'template_name': 'robots.txt',
