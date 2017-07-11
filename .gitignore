@@ -6,3 +6,10 @@
 .idea
 db.sqlite3
 
+# Mac
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
