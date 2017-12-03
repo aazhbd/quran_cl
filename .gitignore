@@ -5,6 +5,7 @@
 .vscode
 .idea
 db.sqlite3
+env/
 
 # Mac
 .DS_Store
