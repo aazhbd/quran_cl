@@ -26,10 +26,8 @@ class HomeView(generic.ListView):
     template_name = 'home.html'
 
 
-def viewInfo(request):
-    context = RequestContext(request)
-    context.update({'msg_body': "", })
-    return render_to_response("info.html", context_instance=context)
+class InfoView(generic.TemplateView):
+    template_name = 'info.html'
 
 
 def viewLogin(request):

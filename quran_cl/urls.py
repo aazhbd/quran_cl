@@ -9,7 +9,7 @@ from quran import views
 urlpatterns = [
     url(r'^$', views.HomeView.as_view(), name='index'),
     url(r'^home$', views.HomeView.as_view(), name='index'),
-    url(r'^info$', views.viewInfo, name='info'),
+    url(r'^info$', views.InfoView.as_view(), name='info'),
 
     url(r'^login$', views.viewLogin, name='login'),
     url(r'^logout$', views.viewLogout, name='logout'),
