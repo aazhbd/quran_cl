@@ -30,39 +30,6 @@ class InfoView(generic.TemplateView):
     template_name = 'info.html'
 
 
-def viewLogin(request):
-    context = RequestContext(request)
-
-    if request.method == "POST":
-        name = request.POST.get('name', None)
-        email = request.POST.get('email', None)
-        upass = request.POST.get('password', None)
-        rpass = request.POST.get('rpass', None)
-        captcha = request.POST.get('hiddenRecaptcha', None)
-
-        if email and upass:
-            try:
-                existing = User.objects.get(email=email)
-            except:
-                existing = None
-
-            if existing is not None:
-                context.update({'msg_body': "The sign up information were invalid, already exists " + str(email), })
-                return render_to_response("signup.html", context_instance=context)
-            else:
-                user = User.objects.create_user(email, email, upass)
-                user.first_name = name
-                user.save()
-                context.update({
-                    'msg_body': "Congratulations, the signup was successful, You can now login to share your expertise or ask questions on any verse to get answers from Scholars and Enthusiasts", })
-        else:
-            context.update({'msg_body': "The sign up information were invalid. " + str(email), })
-            return render_to_response("signup.html", context_instance=context)
-
-    context.update({'msg_body': "Login", })
-    return render_to_response("login.html", context_instance=context)
-
-
 def viewDiscuss(request):
     context = RequestContext(request)
 
@@ -91,19 +58,6 @@ def viewDiscuss(request):
 
     context.update({'msg_body': "Recent Discussions", })
     return render_to_response("discuss.html", context_instance=context)
-
-
-def viewLogout(request):
-    context = RequestContext(request)
-    logout(request)
-    context.update({'msg_body': "You have been logged out.", })
-    return render_to_response("login.html", context_instance=context)
-
-
-def viewSignup(request):
-    context = RequestContext(request)
-    context.update({'msg_body': "Signup", })
-    return render_to_response("signup.html", context_instance=context)
 
 
 def viewChapter(request, **Args):
@@ -275,6 +229,52 @@ def viewSearch(request, **Args):
     })
 
     return render_to_response("search.html", context_instance=context)
+
+
+def viewLogin(request):
+    context = RequestContext(request)
+
+    if request.method == "POST":
+        name = request.POST.get('name', None)
+        email = request.POST.get('email', None)
+        upass = request.POST.get('password', None)
+        rpass = request.POST.get('rpass', None)
+        captcha = request.POST.get('hiddenRecaptcha', None)
+
+        if email and upass:
+            try:
+                existing = User.objects.get(email=email)
+            except:
+                existing = None
+
+            if existing is not None:
+                context.update({'msg_body': "The sign up information were invalid, already exists " + str(email), })
+                return render_to_response("signup.html", context_instance=context)
+            else:
+                user = User.objects.create_user(email, email, upass)
+                user.first_name = name
+                user.save()
+                context.update({
+                    'msg_body': "Congratulations, the signup was successful, You can now login to share your expertise or ask questions on any verse to get answers from Scholars and Enthusiasts", })
+        else:
+            context.update({'msg_body': "The sign up information were invalid. " + str(email), })
+            return render_to_response("signup.html", context_instance=context)
+
+    context.update({'msg_body': "Login", })
+    return render_to_response("login.html", context_instance=context)
+
+
+def viewLogout(request):
+    context = RequestContext(request)
+    logout(request)
+    context.update({'msg_body': "You have been logged out.", })
+    return render_to_response("login.html", context_instance=context)
+
+
+def viewSignup(request):
+    context = RequestContext(request)
+    context.update({'msg_body': "Signup", })
+    return render_to_response("signup.html", context_instance=context)
 
 
 def getChapter(request):
