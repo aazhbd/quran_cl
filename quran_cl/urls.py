@@ -7,8 +7,8 @@ from django.views.generic import TemplateView
 from quran import views
 
 urlpatterns = [
-    url(r'^$', views.viewHome, name='index'),
-    url(r'^home$', views.viewHome, name='index'),
+    url(r'^$', views.HomeView.as_view(), name='index'),
+    url(r'^home$', views.HomeView.as_view(), name='index'),
     url(r'^info$', views.viewInfo, name='info'),
 
     url(r'^login$', views.viewLogin, name='login'),
