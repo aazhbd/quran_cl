@@ -6,6 +6,7 @@
 .idea
 db.sqlite3
 pyenv/
+env/
 
 # Mac
 .DS_Store
