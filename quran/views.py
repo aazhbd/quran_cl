@@ -17,13 +17,13 @@ from quran.models import *
 import unicodedata
 import json
 
+from django.views import generic
 
-def viewHome(request):
-    context = RequestContext(request)
-    context.update({'msg_body': "The Holy Quran", })
-    chapters = Chapter.objects.all()
-    context.update({'chapters': chapters, })
-    return render_to_response("home.html", context_instance=context)
+
+class HomeView(generic.ListView):
+    model = Chapter
+    context_object_name = 'chapters'
+    template_name = 'home.html'
 
 
 def viewInfo(request):
@@ -56,7 +56,7 @@ def viewLogin(request):
                 user.first_name = name
                 user.save()
                 context.update({
-                                   'msg_body': "Congratulations, the signup was successful, You can now login to share your expertise or ask questions on any verse to get answers from Scholars and Enthusiasts", })
+                    'msg_body': "Congratulations, the signup was successful, You can now login to share your expertise or ask questions on any verse to get answers from Scholars and Enthusiasts", })
         else:
             context.update({'msg_body': "The sign up information were invalid. " + str(email), })
             return render_to_response("signup.html", context_instance=context)
@@ -118,7 +118,7 @@ def viewChapter(request, **Args):
     try:
         chName = Chapter.objects.get(pk=cNum)
         context.update({
-                           'msg_body': "Chapter " + chapterNum + ": " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
+            'msg_body': "Chapter " + chapterNum + ": " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
     except:
         context.update({'msg_body': "Invalid chapter number", })
 
@@ -171,7 +171,7 @@ def viewVerse(request, **Args):
     try:
         chName = Chapter.objects.get(pk=cNum)
         context.update({
-                           'msg_body': "Verse " + vNum + " of Chapter " + cNum + " : " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
+            'msg_body': "Verse " + vNum + " of Chapter " + cNum + " : " + chName.transliteration + " " + chName.arabic_name + " (" + chName.english_name + ")", })
     except:
         context.update({'msg_body': "Chapter " + cNum + " Verse " + vNum, })
 
