@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/home/articulatelogic/webapps/local.cnf',
+            'read_default_file': '/home/articulatedlogic.com/webapps/local.cnf',
         },
     }
 }
